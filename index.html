@@ -4,252 +4,262 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DAISY | 관심사로 연결되는 동네 친구</title>
-  <meta name="description" content="심심할 때 가볍게 대화하고, 퇴근 후 산책이나 커피 한 잔을 함께할 가까운 동네 친구. 데이지에서 시작해요." />
+  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (데이팅 목적이 아닌 일상 대화/취미 중심)" />
 
-  <!-- OG (공유/미리보기) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="DAISY | 동네 친구" />
-  <meta property="og:description" content="관심사로 연결되는 동네 친구, 데이지" />
+  <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
+  <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
   <meta property="og:image" content="assets/ad.jpg" />
 
   <style>
     :root{
-      --bg1:#061d14;
-      --bg2:#0a2a1e;
-      --card: rgba(255,255,255,.10);
-      --card2: rgba(255,255,255,.14);
-      --line: rgba(255,255,255,.18);
+      --bg0:#061b13;
+      --bg1:#07251a;
+      --bg2:#0c2f22;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.10);
+      --line: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.74);
-      --accent: #f6d44a;
+      --muted: rgba(255,255,255,.72);
+      --shadow: 0 18px 70px rgba(0,0,0,.35);
+      --radius: 22px;
+      --accent: #f7d75d;
       --accent2:#8cffd0;
-      --radius: 18px;
-      --shadow: 0 18px 60px rgba(0,0,0,.28);
     }
-    *{ box-sizing: border-box; }
-    html, body{ height:100%; }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 650px at 15% 10%, rgba(246,212,74,.18), transparent 55%),
-        radial-gradient(900px 650px at 85% 15%, rgba(140,255,208,.12), transparent 55%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+        radial-gradient(900px 700px at 15% 10%, rgba(247,215,93,.16), transparent 60%),
+        radial-gradient(900px 700px at 85% 12%, rgba(140,255,208,.12), transparent 62%),
+        radial-gradient(1000px 900px at 50% 110%, rgba(255,255,255,.06), transparent 55%),
+        linear-gradient(140deg, var(--bg0), var(--bg2));
     }
-    a{ color: inherit; text-decoration: none; }
+    a{ color:inherit; text-decoration:none; }
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 26px; }
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom: 18px;
+
+    /* Top */
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 16px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
+      display:flex; align-items:center; gap: 12px;
+      min-width: 220px;
     }
-    .logo{
-      width:40px; height:40px;
+    .mark{
+      width: 44px; height: 44px;
       border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.10);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 14px 36px rgba(0,0,0,.24);
       overflow:hidden;
       display:grid; place-items:center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      flex: 0 0 auto;
     }
-    .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .brand .name{ font-weight: 800; letter-spacing: .2px; }
-    .pill{
+    .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .brandText{ display:flex; flex-direction:column; gap:2px; }
+    .brandText .name{ font-weight: 900; letter-spacing: .3px; }
+    .brandText .tag{ font-size: 12.5px; color: var(--muted); }
+
+    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; }
+    .chip{
       display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
       border-radius: 999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.08);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12.5px;
       white-space: nowrap;
     }
 
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 16px;
-      align-items: stretch;
-    }
+    /* Cards */
     .card{
       border: 1px solid var(--line);
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
+      overflow:hidden;
     }
-    .heroText{ padding: 24px; }
-    .h1{
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .heroLeft{ padding: 26px; }
+    h1{
       margin: 0 0 10px;
-      font-size: 44px;
-      line-height: 1.08;
-      letter-spacing: -0.6px;
+      font-size: 46px;
+      letter-spacing: -0.8px;
+      line-height: 1.05;
     }
-    .sub{
+    .lead{
       margin: 0 0 16px;
-      font-size: 17px;
-      line-height: 1.65;
       color: var(--muted);
+      font-size: 16.5px;
+      line-height: 1.7;
     }
-    .bullets{
+    .points{
       margin: 0 0 18px;
       padding-left: 18px;
       color: var(--muted);
-      line-height: 1.85;
-      font-size: 15px;
+      line-height: 1.9;
+      font-size: 14.5px;
     }
-    .actions{
-      display:flex; flex-wrap: wrap;
-      gap: 12px;
-      align-items:center;
-      margin-top: 4px;
-    }
+    .actions{ display:flex; gap: 10px; flex-wrap:wrap; align-items:center; }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
+      gap: 10px;
       padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.08);
       color: var(--text);
-      font-weight: 850;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      font-weight: 900;
       cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.26); }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(246,212,74,.98), rgba(246,212,74,.78));
-      border-color: rgba(246,212,74,.50);
-      color: #1a1a1a;
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.78));
+      border-color: rgba(247,215,93,.55);
+      color: #1b1b1b;
     }
     .btn.primary:hover{
-      background: linear-gradient(135deg, rgba(246,212,74,1), rgba(246,212,74,.84));
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.86));
     }
-    .note{
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 13px;
+    .hint{
+      margin-top: 12px;
+      color: rgba(255,255,255,.72);
+      font-size: 12.8px;
       display:flex;
+      flex-wrap:wrap;
       gap:10px;
-      flex-wrap: wrap;
     }
+    .hint span{ opacity:.95; }
 
-    .heroMedia{
-      position:relative;
-      min-height: 420px;
-    }
-    .heroMedia img{
+    .heroRight{ position:relative; min-height: 440px; }
+    .heroRight img{
       width:100%; height:100%;
       object-fit: cover;
       display:block;
-      filter: saturate(1.05) contrast(1.02);
+      filter: saturate(1.06) contrast(1.02);
     }
-    .overlay{
+    .heroOverlay{
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55));
+      background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.62));
       pointer-events:none;
     }
-    .caption{
+    .heroBadge{
+      position:absolute;
+      top: 14px; left: 14px; right: 14px;
+      display:flex; justify-content:space-between; gap: 10px; align-items:center;
+    }
+    .mini{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.84);
+      display:inline-flex; align-items:center; gap:8px;
+      white-space: nowrap;
+    }
+    .mini b{ color: var(--accent); }
+
+    .heroCaption{
       position:absolute;
       left: 14px; right: 14px; bottom: 14px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.28);
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      padding: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.24);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 14px 14px;
     }
-    .caption strong{ display:block; font-size: 16px; margin-bottom: 6px; }
-    .caption span{ display:block; color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.45; }
+    .heroCaption strong{ display:block; margin-bottom: 6px; font-size: 16px; }
+    .heroCaption span{ color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.45; display:block; }
 
+    /* Sections */
     .sectionTitle{
       margin: 18px 0 10px;
-      font-size: 16px;
-      letter-spacing: .2px;
+      font-size: 15px;
       color: rgba(255,255,255,.86);
+      letter-spacing: .2px;
     }
-    .features{
+    .grid3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .feature{
+    .tile{
       padding: 14px;
-      border:1px solid var(--line);
+      border: 1px solid var(--line);
       background: var(--card2);
-      border-radius: 16px;
+      border-radius: 18px;
     }
-    .feature b{ display:block; margin-bottom: 6px; }
-    .feature p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+    .tile b{ display:block; margin-bottom: 6px; }
+    .tile p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.58; }
 
-    .split{
+    .two{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
       margin-top: 12px;
     }
     .panel{ padding: 18px; }
-    .panel h3{
-      margin: 0 0 8px;
-      font-size: 18px;
-      letter-spacing: -.2px;
-    }
-    .panel p{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 14.5px;
-    }
+    .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
+    .panel p{ margin:0; color: var(--muted); line-height:1.65; font-size: 14.5px; }
+
     .steps{
       margin: 12px 0 0;
       padding: 0;
-      list-style: none;
+      list-style:none;
       display:grid;
       gap: 10px;
     }
     .step{
+      display:flex; gap:10px; align-items:flex-start;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.08);
-      border-radius: 14px;
-      padding: 12px 12px;
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
+      background: rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 12px;
     }
-    .badge{
-      min-width: 28px; height: 28px;
-      border-radius: 10px;
-      background: rgba(246,212,74,.22);
-      border: 1px solid rgba(246,212,74,.35);
+    .num{
+      width: 30px; height: 30px;
+      border-radius: 12px;
       display:grid; place-items:center;
+      border: 1px solid rgba(247,215,93,.35);
+      background: rgba(247,215,93,.18);
       color: var(--accent);
       font-weight: 900;
-      font-size: 13px;
+      flex: 0 0 auto;
       margin-top: 1px;
     }
     .step b{ display:block; margin-bottom: 2px; }
-    .step span{ color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+    .step span{ display:block; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
 
-    .gallery{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
+    .callout{
       margin-top: 12px;
-    }
-    .shot{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.08);
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
       border-radius: 16px;
-      overflow:hidden;
-      min-height: 220px;
+      padding: 12px;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      line-height: 1.55;
     }
-    .shot img{ width:100%; height:100%; object-fit: cover; display:block; }
-    .shot .inner{ padding: 16px; }
-    .shot .inner b{ display:block; margin-bottom: 6px; }
-    .shot .inner p{ margin:0; color: var(--muted); line-height: 1.6; font-size: 14px; }
 
+    /* Footer */
     footer{
       margin-top: 18px;
       padding: 14px 4px 6px;
@@ -263,199 +273,241 @@
     }
     footer a{ text-decoration: underline; opacity: .92; }
 
-    /* mobile */
+    /* modal */
+    .modalBg{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center; justify-content:center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      width: min(560px, 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(10,18,14,.92);
+      box-shadow: 0 30px 120px rgba(0,0,0,.55);
+      padding: 16px;
+    }
+    .modal h4{ margin: 0 0 8px; font-size: 17px; }
+    .modal p{ margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+    .modal .row{ display:flex; gap:10px; justify-content:flex-end; margin-top: 12px; flex-wrap:wrap; }
+    .x{
+      float:right;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 800;
+    }
+
     @media (max-width: 920px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .heroMedia{ min-height: 360px; }
-      .h1{ font-size: 38px; }
-      .features{ grid-template-columns: 1fr; }
-      .split{ grid-template-columns: 1fr; }
-      .gallery{ grid-template-columns: 1fr; }
+      .hero{ grid-template-columns: 1fr; }
+      h1{ font-size: 38px; }
+      .heroRight{ min-height: 360px; }
+      .grid3{ grid-template-columns: 1fr; }
+      .two{ grid-template-columns: 1fr; }
+      .chipRow{ justify-content:flex-start; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+
     <!-- Top -->
-    <div class="topbar">
+    <div class="top">
       <div class="brand">
-        <div class="logo">
-          <img src="assets/logo.png" alt="DAISY 로고" onerror="this.style.display='none'">
+        <div class="mark" aria-label="DAISY 로고">
+          <!-- 로고가 없으면 숨기고, 텍스트 로고로 보여줌 -->
+          <img src="assets/logo.png" alt="DAISY" onerror="this.style.display='none';document.getElementById('textLogo').style.display='block';">
+          <div id="textLogo" style="display:none;font-weight:900;letter-spacing:.3px;">D</div>
         </div>
-        <div class="name">DAISY</div>
+        <div class="brandText">
+          <div class="name">DAISY</div>
+          <div class="tag">관심사로 연결되는 동네 친구</div>
+        </div>
       </div>
-      <div class="pill">관심사로 연결되는 동네 친구 🌼</div>
+
+      <div class="chipRow">
+        <div class="chip">✅ 로그인 없이 문의</div>
+        <div class="chip">✅ 일상 대화/취미 중심</div>
+        <div class="chip">✅ 가까운 동네 연결</div>
+      </div>
     </div>
 
     <!-- Hero -->
-    <div class="heroGrid">
-      <section class="card heroText">
-        <h1 class="h1">오늘, 동네 친구<br/>어때요?</h1>
-        <p class="sub">
+    <div class="hero">
+      <section class="card heroLeft">
+        <h1>오늘, 동네 친구<br/>어때요?</h1>
+        <p class="lead">
           심심할 때 가볍게 대화하고, 퇴근 후 산책이나 커피 한 잔을 함께할
           <b>가까운 동네 친구</b>를 찾아보세요.
         </p>
 
-        <ul class="bullets">
-          <li>데이팅이 아닌, 일상 대화 중심</li>
-          <li>거리보다 관심사로 먼저 연결</li>
-          <li>부담 없이 대화부터 시작</li>
+        <ul class="points">
+          <li><b>데이팅 목적이 아닌</b> 일상 대화 중심</li>
+          <li>거리보다 <b>관심사</b>로 먼저 연결</li>
+          <li>부담 없이 <b>대화부터</b> 시작</li>
         </ul>
 
         <div class="actions">
-          <!-- 채팅 위젯을 열게 하는 버튼 -->
-          <button class="btn primary" type="button" onclick="openChat()">지금 채팅으로 문의하기</button>
+          <button class="btn primary" type="button" onclick="guideChat()">지금 채팅으로 문의하기</button>
           <a class="btn" href="#how">어떻게 쓰나요?</a>
+          <button class="btn" type="button" onclick="copyTemplate()">문의 템플릿 복사</button>
         </div>
 
-        <div class="note">
-          <span>✔ 로그인 없이 바로 문의 가능</span>
-          <span>✔ 1분 안에 연결 안내</span>
+        <div class="hint">
+          <span>💡 버튼을 누르면 “오른쪽 아래 채팅 아이콘”으로 안내해요</span>
+          <span>🔒 개인정보는 최소한만 받아요</span>
         </div>
       </section>
 
-      <!-- Right image: your ad collage -->
-      <aside class="card heroMedia">
+      <aside class="card heroRight">
         <img src="assets/ad.jpg" alt="DAISY 광고 이미지">
-        <div class="overlay"></div>
-        <div class="caption">
+        <div class="heroOverlay"></div>
+
+        <div class="heroBadge">
+          <div class="mini">🌼 <b>DAISY</b> 랜딩</div>
+          <div class="mini">가까운 곳에서, 가볍게</div>
+        </div>
+
+        <div class="heroCaption">
           <strong>심심할 때, 동네 친구</strong>
-          <span>가까운 곳에서 관심사로 연결되는 일상 대화. 부담 없이 시작해요.</span>
+          <span>관심사로 연결되는 일상 대화. 부담 없이 시작해요.</span>
         </div>
       </aside>
     </div>
 
-    <!-- Features -->
+    <!-- For who -->
     <div class="sectionTitle">데이지는 이런 분께 잘 맞아요</div>
-    <div class="features">
-      <div class="feature">
+    <div class="grid3">
+      <div class="tile">
         <b>퇴근 후, 가볍게</b>
         <p>맥주 한 잔, 산책, 커피처럼 부담 없는 만남부터 시작해요.</p>
       </div>
-      <div class="feature">
+      <div class="tile">
         <b>새로운 동네 생활</b>
         <p>이사/새로운 환경에서 동네 친구가 필요할 때 도움돼요.</p>
       </div>
-      <div class="feature">
+      <div class="tile">
         <b>관심사로 연결</b>
-        <p>주제(취미/산책/카페/운동)로 먼저 이야기하니까 훨씬 편해요.</p>
+        <p>주제(취미/산책/카페/운동/전시)로 먼저 얘기하니 편해요.</p>
       </div>
     </div>
 
-    <!-- How / What -->
-    <div id="how" class="split">
+    <!-- How -->
+    <div id="how" class="two">
       <section class="card panel">
         <h3>어떻게 시작하나요?</h3>
-        <p>아래 “채팅으로 문의”를 누르고, 동네/관심사를 알려주면 안내해드려요.</p>
+        <p>아래 순서대로 간단히 알려주면 연결 안내를 도와드려요.</p>
 
         <ul class="steps">
           <li class="step">
-            <div class="badge">1</div>
-            <div>
-              <b>동네 알려주기</b>
-              <span>예: 강남 / 성수 / 잠실 / 홍대</span>
-            </div>
+            <div class="num">1</div>
+            <div><b>동네</b><span>예: 강남 / 성수 / 잠실 / 홍대</span></div>
           </li>
           <li class="step">
-            <div class="badge">2</div>
-            <div>
-              <b>관심사 선택</b>
-              <span>예: 산책 / 카페 / 맥주 / 운동 / 전시</span>
-            </div>
+            <div class="num">2</div>
+            <div><b>관심사</b><span>예: 산책 / 카페 / 맥주 / 운동 / 전시</span></div>
           </li>
           <li class="step">
-            <div class="badge">3</div>
-            <div>
-              <b>안내 받고 시작</b>
-              <span>필요한 정보만 확인 후 연결을 도와드려요.</span>
-            </div>
+            <div class="num">3</div>
+            <div><b>상담</b><span>필요한 정보만 확인 후 안내해요.</span></div>
           </li>
         </ul>
 
-        <div class="actions" style="margin-top:14px;">
-          <button class="btn primary" type="button" onclick="openChat()">채팅으로 시작하기</button>
-          <button class="btn" type="button" onclick="prefillMessage()">문의 템플릿 넣기</button>
+        <div class="callout">
+          ✅ 앱/로그인 화면을 보여줄 필요 없어요. <br/>
+          오른쪽 아래 “채팅 아이콘”에서 바로 문의할 수 있어요.
         </div>
 
-        <div class="note">
-          <span>※ 공개하고 싶지 않은 로그인/앱 화면은 보여줄 필요 없어요.</span>
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn primary" type="button" onclick="guideChat()">채팅으로 시작하기</button>
         </div>
       </section>
 
       <section class="card panel">
         <h3>무엇을 문의하면 되나요?</h3>
-        <p>광고 클릭 후 바로 이해되도록, 아래 정보를 간단히 보내면 충분해요.</p>
+        <p>광고 클릭 후 바로 이해되도록, 아래처럼 보내면 충분해요.</p>
 
-        <div class="shot" style="margin-top:12px; min-height: 240px;">
-          <img src="assets/hero.jpg" alt="DAISY 분위기 이미지" onerror="this.parentElement.style.display='none'">
-          <div class="inner" style="display:none"></div>
+        <div class="callout" style="margin-top:12px;">
+          <b>추천 메시지</b><br/>
+          “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요. 동네 친구 연결 문의드려요 🙂”
         </div>
 
-        <div class="shot" style="margin-top:12px;">
-          <div class="inner">
-            <b>추천 메시지 예시</b>
-            <p>
-              “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요.
-              오늘(또는 이번 주) 이야기할 동네 친구 찾고 있어요 🙂”
-            </p>
-          </div>
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn" type="button" onclick="copyTemplate()">추천 메시지 복사</button>
+          <button class="btn" type="button" onclick="guideChat()">채팅 열기 안내</button>
+        </div>
+
+        <div class="callout" style="margin-top:12px; opacity:.95;">
+          <img src="assets/hero.jpg" alt="DAISY 분위기 이미지" style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
+               onerror="this.style.display='none'">
         </div>
       </section>
     </div>
 
-    <!-- Trust / footer -->
+    <!-- Footer -->
     <footer>
       <div>
-        <a href="#" onclick="alert('개인정보처리방침 URL로 바꿔주세요'); return false;">개인정보처리방침</a>
-        &nbsp;·&nbsp;
-        <a href="#" onclick="alert('이용약관 URL로 바꿔주세요'); return false;">이용약관</a>
+        <a href="privacy.html">개인정보처리방침</a> ·
+        <a href="terms.html">이용약관</a>
       </div>
       <div>© DAISY</div>
     </footer>
+
   </div>
 
-  <!-- ✅ SalesSmartly: 웹사이트에 채팅 위젯 설치 (너 스크린샷에 나온 코드 그대로) -->
-  <script src="https://plugin-code.salesmartly.com/js/project_604078_623418_1768586870.js"></script>
+  <!-- 안내 모달 -->
+  <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
+    <div class="modal">
+      <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
+      <h4>채팅은 이렇게 시작해요</h4>
+      <p>
+        화면 오른쪽 아래에 있는 <b>채팅 아이콘</b>을 눌러주세요 🙂<br/>
+        아이콘이 안 보이면 광고 차단 확장(AdBlock/uBlock) 또는 브라우저 설정 때문에 가려질 수 있어요.
+      </p>
+      <div class="row">
+        <button class="btn primary" type="button" onclick="closeModal()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ SalesSmartly: 웹사이트 채팅 위젯 (정확히 623915로 교체) -->
+  <script src="https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js"></script>
 
   <script>
-    // 채팅 위젯이 페이지에 뜬 다음, 사용자가 쉽게 열 수 있게 시도하는 함수
-    // (위젯마다 오픈 API가 다를 수 있어, 아래는 "클릭 유도" 방식으로 구현)
-    function openChat(){
-      // 1) 우측하단에 떠있는 채팅 버튼(있을 경우)을 찾아 클릭 시도
-      const candidates = [
-        '[class*="salessmartly"] button',
-        '[id*="salessmartly"] button',
-        'iframe',
-      ];
-      for (const sel of candidates){
-        const el = document.querySelector(sel);
-        if (el){
-          try{
-            // iframe이면 클릭이 안 될 수 있어서 안내만
-            if (el.tagName.toLowerCase() === 'iframe'){
-              alert('오른쪽 아래 채팅 버튼을 눌러주세요 🙂');
-            } else {
-              el.click();
-            }
-            return;
-          }catch(e){}
-        }
-      }
-      // 2) 못 찾으면 안내
-      alert('오른쪽 아래 채팅 버튼을 눌러주세요 🙂');
+    function openModal(){ document.getElementById('modalBg').style.display='flex'; }
+    function closeModal(){ document.getElementById('modalBg').style.display='none'; }
+
+    function guideChat(){
+      // 위젯을 강제로 여는 API가 없을 수 있어서 “안내” 방식이 가장 안정적
+      openModal();
+      // 혹시 페이지에 위젯 버튼이 DOM으로 노출되는 경우 클릭 시도 (되면 열리고, 안 되면 안내만 됨)
+      try{
+        const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
+        if (btn) btn.click();
+      }catch(e){}
     }
 
-    function prefillMessage(){
-      // 위젯마다 메시지 주입 API가 제각각이라, 여기서는 사용자가 복사해서 붙이도록 제공
+    function copyTemplate(){
       const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동/전시]예요. 동네 친구 연결 문의드려요 🙂";
-      navigator.clipboard?.writeText(msg).then(()=>{
-        alert("문의 템플릿을 복사했어요!\n채팅창에 붙여넣기 해주세요 🙂");
-        openChat();
-      }).catch(()=>{
-        alert("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:\n\n" + msg);
-        openChat();
-      });
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(msg).then(()=>{
+          alert("추천 메시지를 복사했어요! 채팅창에 붙여넣기 해주세요 🙂");
+          guideChat();
+        }).catch(()=>{
+          prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
+          guideChat();
+        });
+      } else {
+        prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
+        guideChat();
+      }
     }
   </script>
 </body>

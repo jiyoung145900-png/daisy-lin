@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DAISY | 관심사로 연결되는 동네 친구</title>
-  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (데이팅 목적이 아닌 일상 대화/취미 중심)" />
+  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (일상 대화/취미 중심)" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -14,18 +14,19 @@
 
   <style>
     :root{
-      --bg0:#061b13;
-      --bg1:#07251a;
-      --bg2:#0c2f22;
+      --bg0:#04140e;
+      --bg1:#062118;
+      --bg2:#0b3023;
       --card: rgba(255,255,255,.08);
       --card2: rgba(255,255,255,.10);
       --line: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
-      --shadow: 0 18px 70px rgba(0,0,0,.35);
-      --radius: 22px;
+      --shadow: 0 18px 70px rgba(0,0,0,.38);
+      --radius: 24px;
       --accent: #f7d75d;
       --accent2:#8cffd0;
+      --danger:#ff5a5f;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -33,45 +34,80 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
+      background: linear-gradient(140deg, var(--bg0), var(--bg2));
+      overflow-x:hidden;
+    }
+    /* fancy background */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
       background:
-        radial-gradient(900px 700px at 15% 10%, rgba(247,215,93,.16), transparent 60%),
-        radial-gradient(900px 700px at 85% 12%, rgba(140,255,208,.12), transparent 62%),
-        radial-gradient(1000px 900px at 50% 110%, rgba(255,255,255,.06), transparent 55%),
+        radial-gradient(1100px 800px at 16% 10%, rgba(247,215,93,.18), transparent 60%),
+        radial-gradient(1100px 800px at 86% 12%, rgba(140,255,208,.14), transparent 62%),
+        radial-gradient(900px 700px at 40% 110%, rgba(255,255,255,.08), transparent 55%),
         linear-gradient(140deg, var(--bg0), var(--bg2));
     }
+    .bg:before{
+      content:"";
+      position:absolute; inset:-200px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0 2px, transparent 3px) 0 0/38px 38px,
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.045) 0 2px, transparent 3px) 0 0/54px 54px;
+      opacity:.55;
+      filter: blur(.2px);
+      transform: rotate(-2deg);
+      pointer-events:none;
+    }
+
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 26px; }
 
     /* Top */
     .top{
       display:flex; align-items:center; justify-content:space-between;
-      gap: 14px;
-      margin-bottom: 16px;
+      gap: 14px; margin-bottom: 16px;
     }
     .brand{
-      display:flex; align-items:center; gap: 12px;
-      min-width: 220px;
+      display:flex; align-items:center; gap: 14px;
+      min-width: 240px;
+      cursor:pointer;
+      user-select:none;
     }
     .mark{
-      width: 44px; height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.08);
-      box-shadow: 0 14px 36px rgba(0,0,0,.24);
+      width: 64px; height: 64px;   /* ✅ 로고 크게 */
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 18px 48px rgba(0,0,0,.26);
       overflow:hidden;
       display:grid; place-items:center;
       flex: 0 0 auto;
+      position:relative;
+    }
+    .mark:after{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(120px 120px at 30% 20%, rgba(247,215,93,.25), transparent 60%);
+      pointer-events:none;
     }
     .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .brandText{ display:flex; flex-direction:column; gap:2px; }
-    .brandText .name{ font-weight: 900; letter-spacing: .3px; }
-    .brandText .tag{ font-size: 12.5px; color: var(--muted); }
+    .brandText{ display:flex; flex-direction:column; gap:4px; }
+    .brandText .name{ font-weight: 950; letter-spacing: .3px; font-size: 18px; }
+    .brandText .tag{ font-size: 12.8px; color: var(--muted); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .tapHint{
+      font-size: 12px;
+      color: rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
     .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding: 10px 12px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
       border-radius: 999px;
       color: var(--muted);
@@ -81,11 +117,12 @@
 
     /* Cards */
     .card{
-      border: 1px solid var(--line);
-      background: var(--card);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
+      backdrop-filter: blur(10px);
     }
 
     /* Hero */
@@ -95,18 +132,26 @@
       gap: 14px;
       align-items: stretch;
     }
-    .heroLeft{ padding: 26px; }
+    .heroLeft{ padding: 26px; position:relative; }
+    .heroLeft:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 360px at 20% 10%, rgba(247,215,93,.14), transparent 60%);
+      pointer-events:none;
+    }
     h1{
       margin: 0 0 10px;
       font-size: 46px;
       letter-spacing: -0.8px;
       line-height: 1.05;
+      position:relative;
     }
     .lead{
       margin: 0 0 16px;
       color: var(--muted);
       font-size: 16.5px;
       line-height: 1.7;
+      position:relative;
     }
     .points{
       margin: 0 0 18px;
@@ -114,8 +159,10 @@
       color: var(--muted);
       line-height: 1.9;
       font-size: 14.5px;
+      position:relative;
     }
-    .actions{ display:flex; gap: 10px; flex-wrap:wrap; align-items:center; }
+
+    .actions{ display:flex; gap: 10px; flex-wrap:wrap; align-items:center; position:relative; }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap: 10px;
@@ -124,7 +171,7 @@
       border: 1px solid rgba(255,255,255,.20);
       background: rgba(255,255,255,.08);
       color: var(--text);
-      font-weight: 900;
+      font-weight: 950;
       cursor:pointer;
       transition: transform .08s ease, background .2s ease, border-color .2s ease;
     }
@@ -137,17 +184,17 @@
     .btn.primary:hover{
       background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.86));
     }
-    .hint{
+    .micro{
       margin-top: 12px;
-      color: rgba(255,255,255,.72);
+      color: rgba(255,255,255,.76);
       font-size: 12.8px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
+      position:relative;
     }
-    .hint span{ opacity:.95; }
 
-    .heroRight{ position:relative; min-height: 440px; }
+    .heroRight{ position:relative; min-height: 460px; }
     .heroRight img{
       width:100%; height:100%;
       object-fit: cover;
@@ -156,7 +203,7 @@
     }
     .heroOverlay{
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.62));
+      background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.66));
       pointer-events:none;
     }
     .heroBadge{
@@ -166,7 +213,7 @@
     }
     .mini{
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.22);
+      background: rgba(0,0,0,.24);
       backdrop-filter: blur(10px);
       border-radius: 999px;
       padding: 9px 12px;
@@ -181,7 +228,7 @@
       position:absolute;
       left: 14px; right: 14px; bottom: 14px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.24);
+      background: rgba(0,0,0,.26);
       backdrop-filter: blur(10px);
       border-radius: 18px;
       padding: 14px 14px;
@@ -203,8 +250,8 @@
     }
     .tile{
       padding: 14px;
-      border: 1px solid var(--line);
-      background: var(--card2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
       border-radius: 18px;
     }
     .tile b{ display:block; margin-bottom: 6px; }
@@ -229,7 +276,7 @@
     }
     .step{
       display:flex; gap:10px; align-items:flex-start;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       border-radius: 16px;
       padding: 12px;
@@ -241,7 +288,7 @@
       border: 1px solid rgba(247,215,93,.35);
       background: rgba(247,215,93,.18);
       color: var(--accent);
-      font-weight: 900;
+      font-weight: 950;
       flex: 0 0 auto;
       margin-top: 1px;
     }
@@ -254,7 +301,7 @@
       background: rgba(0,0,0,.18);
       border-radius: 16px;
       padding: 12px;
-      color: rgba(255,255,255,.78);
+      color: rgba(255,255,255,.80);
       font-size: 13px;
       line-height: 1.55;
     }
@@ -262,7 +309,7 @@
     /* Footer */
     footer{
       margin-top: 18px;
-      padding: 14px 4px 6px;
+      padding: 14px 4px 68px; /* ✅ 하단 고정바 공간 */
       color: var(--muted);
       font-size: 12.5px;
       display:flex;
@@ -273,10 +320,50 @@
     }
     footer a{ text-decoration: underline; opacity: .92; }
 
+    /* Bottom fixed CTA (모바일/데스크탑 모두) */
+    .fixedBar{
+      position: fixed;
+      left: 12px; right: 12px; bottom: 12px;
+      z-index: 9998;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.36);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 22px 90px rgba(0,0,0,.45);
+    }
+    .fixedLeft{
+      display:flex;
+      flex-direction:column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .fixedLeft b{ font-size: 13.5px; }
+    .fixedLeft span{ font-size: 12.5px; color: rgba(255,255,255,.74); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .fixedActions{ display:flex; gap: 8px; flex:0 0 auto; }
+    .btnSmall{
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 950;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor:pointer;
+    }
+    .btnSmall.primary{
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.78));
+      border-color: rgba(247,215,93,.55);
+      color: #1b1b1b;
+    }
+
     /* modal */
     .modalBg{
       position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,.58);
       display:none;
       align-items:center; justify-content:center;
       padding: 18px;
@@ -287,7 +374,7 @@
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.18);
       background: rgba(10,18,14,.92);
-      box-shadow: 0 30px 120px rgba(0,0,0,.55);
+      box-shadow: 0 30px 120px rgba(0,0,0,.58);
       padding: 16px;
     }
     .modal h4{ margin: 0 0 8px; font-size: 17px; }
@@ -301,7 +388,7 @@
       border-radius: 12px;
       padding: 8px 10px;
       cursor:pointer;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     @media (max-width: 920px){
@@ -311,24 +398,30 @@
       .grid3{ grid-template-columns: 1fr; }
       .two{ grid-template-columns: 1fr; }
       .chipRow{ justify-content:flex-start; }
+      .brand{ min-width: 0; }
     }
   </style>
 </head>
 
 <body>
+  <div class="bg" aria-hidden="true"></div>
+
   <div class="wrap">
 
-    <!-- Top -->
+    <!-- Top (로고 크게 + 클릭 안내) -->
     <div class="top">
-      <div class="brand">
+      <div class="brand" onclick="guideChat()" title="채팅 안내 보기">
         <div class="mark" aria-label="DAISY 로고">
-          <!-- 로고가 없으면 숨기고, 텍스트 로고로 보여줌 -->
-          <img src="assets/logo.png" alt="DAISY" onerror="this.style.display='none';document.getElementById('textLogo').style.display='block';">
-          <div id="textLogo" style="display:none;font-weight:900;letter-spacing:.3px;">D</div>
+          <img src="assets/logo.png" alt="DAISY"
+               onerror="this.style.display='none';document.getElementById('textLogo').style.display='block';">
+          <div id="textLogo" style="display:none;font-weight:950;letter-spacing:.2px;">DAISY</div>
         </div>
         <div class="brandText">
           <div class="name">DAISY</div>
-          <div class="tag">관심사로 연결되는 동네 친구</div>
+          <div class="tag">
+            관심사로 연결되는 동네 친구
+            <span class="tapHint">⬇️ 아래 “채팅하기” 눌러주세요</span>
+          </div>
         </div>
       </div>
 
@@ -360,9 +453,9 @@
           <button class="btn" type="button" onclick="copyTemplate()">문의 템플릿 복사</button>
         </div>
 
-        <div class="hint">
-          <span>💡 버튼을 누르면 “오른쪽 아래 채팅 아이콘”으로 안내해요</span>
-          <span>🔒 개인정보는 최소한만 받아요</span>
+        <div class="micro">
+          <span>💬 채팅은 <b>오른쪽 아래 아이콘</b>에서 시작돼요</span>
+          <span>🧩 아이콘이 안 보이면 광고 차단 확장을 꺼주세요</span>
         </div>
       </section>
 
@@ -421,12 +514,8 @@
         </ul>
 
         <div class="callout">
-          ✅ 앱/로그인 화면을 보여줄 필요 없어요. <br/>
-          오른쪽 아래 “채팅 아이콘”에서 바로 문의할 수 있어요.
-        </div>
-
-        <div class="actions" style="margin-top:12px;">
-          <button class="btn primary" type="button" onclick="guideChat()">채팅으로 시작하기</button>
+          ✅ 앱/로그인 화면을 보여줄 필요 없어요.<br/>
+          아래 <b>“채팅하기” 버튼</b>을 누르면 안내가 떠요.
         </div>
       </section>
 
@@ -439,13 +528,9 @@
           “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요. 동네 친구 연결 문의드려요 🙂”
         </div>
 
-        <div class="actions" style="margin-top:12px;">
-          <button class="btn" type="button" onclick="copyTemplate()">추천 메시지 복사</button>
-          <button class="btn" type="button" onclick="guideChat()">채팅 열기 안내</button>
-        </div>
-
-        <div class="callout" style="margin-top:12px; opacity:.95;">
-          <img src="assets/hero.jpg" alt="DAISY 분위기 이미지" style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
+        <div class="callout" style="margin-top:12px;">
+          <img src="assets/hero.jpg" alt="DAISY 분위기 이미지"
+               style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
                onerror="this.style.display='none'">
         </div>
       </section>
@@ -462,14 +547,26 @@
 
   </div>
 
+  <!-- ✅ 하단 고정 CTA -->
+  <div class="fixedBar" role="region" aria-label="문의 고정 바">
+    <div class="fixedLeft">
+      <b>지금 바로 문의하세요</b>
+      <span>오른쪽 아래 채팅 아이콘에서 상담이 시작돼요 🙂</span>
+    </div>
+    <div class="fixedActions">
+      <button class="btnSmall" type="button" onclick="copyTemplate()">템플릿</button>
+      <button class="btnSmall primary" type="button" onclick="guideChat()">채팅하기</button>
+    </div>
+  </div>
+
   <!-- 안내 모달 -->
   <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
     <div class="modal">
       <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
       <h4>채팅은 이렇게 시작해요</h4>
       <p>
-        화면 오른쪽 아래에 있는 <b>채팅 아이콘</b>을 눌러주세요 🙂<br/>
-        아이콘이 안 보이면 광고 차단 확장(AdBlock/uBlock) 또는 브라우저 설정 때문에 가려질 수 있어요.
+        화면 <b>오른쪽 아래</b>에 있는 <b>채팅 아이콘</b>을 눌러주세요 🙂<br/>
+        아이콘이 안 보이면 <b>광고 차단 확장(AdBlock/uBlock)</b> 또는 브라우저 설정 때문에 가려질 수 있어요.
       </p>
       <div class="row">
         <button class="btn primary" type="button" onclick="closeModal()">확인</button>
@@ -477,7 +574,7 @@
     </div>
   </div>
 
-  <!-- ✅ SalesSmartly: 웹사이트 채팅 위젯 (정확히 623915로 교체) -->
+  <!-- ✅ SalesSmartly: 웹사이트 채팅 위젯 -->
   <script src="https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js"></script>
 
   <script>
@@ -485,9 +582,8 @@
     function closeModal(){ document.getElementById('modalBg').style.display='none'; }
 
     function guideChat(){
-      // 위젯을 강제로 여는 API가 없을 수 있어서 “안내” 방식이 가장 안정적
+      // 위젯 강제 오픈이 막힐 수 있어서 안내 모달 + (가능하면) 클릭 시도
       openModal();
-      // 혹시 페이지에 위젯 버튼이 DOM으로 노출되는 경우 클릭 시도 (되면 열리고, 안 되면 안내만 됨)
       try{
         const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
         if (btn) btn.click();

@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>DAISY | 관심사로 연결되는 동네 친구</title>
   <meta name="description" content="심심할 때 가볍게 대화하고, 퇴근 후 산책이나 커피 한 잔을 함께할 가까운 동네 친구. 데이지에서 시작해요." />
+  <meta property="og:title" content="DAISY | 동네 친구" />
+  <meta property="og:description" content="관심사로 연결되는 동네 친구, 데이지" />
+  <meta property="og:image" content="assets/ad.jpg" />
+
   <style>
     :root{
-      --bg1:#0b2b1f;
-      --bg2:#0e3b2b;
+      --bg:#071a13;
       --card: rgba(255,255,255,.10);
-      --card2: rgba(255,255,255,.14);
+      --line: rgba(255,255,255,.16);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
-      --line: rgba(255,255,255,.18);
       --accent: #f6d44a;
       --radius: 18px;
     }
@@ -23,27 +25,26 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1000px 700px at 15% 10%, rgba(246,212,74,.25), transparent 55%),
-        radial-gradient(900px 600px at 85% 20%, rgba(120,255,200,.18), transparent 55%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+        radial-gradient(900px 600px at 15% 10%, rgba(246,212,74,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(120,255,200,.14), transparent 55%),
+        linear-gradient(135deg, #062017, #0a2c20);
       min-height:100vh;
     }
     a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px}
     header{
       display:flex;align-items:center;justify-content:space-between;
-      gap:14px;margin-bottom:26px
+      gap:12px;margin-bottom:18px
     }
     .brand{display:flex;align-items:center;gap:10px}
     .logo{
-      width:38px;height:38px;border-radius:12px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid var(--line);
-      display:grid;place-items:center;
-      overflow:hidden;
+      width:40px;height:40px;border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      display:grid;place-items:center;overflow:hidden;
     }
     .logo img{width:100%;height:100%;object-fit:cover}
-    .brand h3{margin:0;font-size:16px;letter-spacing:.2px}
+    .brand b{font-size:15px;letter-spacing:.2px}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:10px 12px;border-radius:999px;
@@ -51,30 +52,28 @@
       background: rgba(255,255,255,.08);
       font-size:13px;color:var(--muted)
     }
+
     .grid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
       align-items:stretch;
     }
     .card{
       border:1px solid var(--line);
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: 0 16px 50px rgba(0,0,0,.25);
+      box-shadow: 0 18px 55px rgba(0,0,0,.28);
       overflow:hidden;
     }
-    .hero{
-      padding:26px;
-      position:relative;
-    }
+    .hero{padding:22px}
     .hero h1{
       margin:0 0 10px;
       font-size:44px;
       line-height:1.08;
       letter-spacing:-.6px;
     }
-    .hero p{margin:0 0 18px;font-size:17px;line-height:1.65;color:var(--muted)}
+    .hero p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--muted)}
     .bullets{
       margin:0 0 18px;padding-left:18px;
       color:var(--muted);line-height:1.8;font-size:15px
@@ -90,84 +89,90 @@
       text-decoration:none;
       font-weight:800;
       transition: transform .08s ease, background .2s ease;
+      cursor:pointer;
     }
     .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.14)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(246,212,74,.95), rgba(246,212,74,.75));
+      background: linear-gradient(135deg, rgba(246,212,74,.98), rgba(246,212,74,.78));
       color:#1b1b1b;
-      border: 1px solid rgba(246,212,74,.4);
+      border: 1px solid rgba(246,212,74,.45);
     }
-    .btn.primary:hover{background: linear-gradient(135deg, rgba(246,212,74,1), rgba(246,212,74,.82))}
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(246,212,74,1), rgba(246,212,74,.84))}
     .mini{
-      font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap
+      margin-top:14px;
+      font-size:13px;color:var(--muted);
+      display:flex;gap:10px;flex-wrap:wrap
     }
-    .mini a{opacity:.9}
-    .imgCard{display:flex;flex-direction:column}
-    .imgTop{
-      height:240px;
-      background: rgba(255,255,255,.06);
-      border-bottom:1px solid var(--line);
+
+    .media{
+      display:flex;flex-direction:column;
+      min-height: 420px;
+      position:relative;
     }
-    .imgTop img{width:100%;height:100%;object-fit:cover}
-    .imgBody{padding:18px}
-    .kpi{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px
+    .mediaTop{
+      height: 100%;
+      position:relative;
+      background:#0b241a;
     }
-    .kpi > div{
-      border:1px solid var(--line);
-      background: var(--card2);
-      border-radius: 14px;
-      padding:12px;
+    .mediaTop img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.02);
     }
-    .kpi strong{display:block;font-size:14px;margin-bottom:4px}
-    .kpi span{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
-    .section{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
+    .overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.45));
+      pointer-events:none;
     }
-    .shot{
-      border:1px solid var(--line);
-      background: var(--card);
+    .mediaCaption{
+      position:absolute; left:16px; right:16px; bottom:16px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(6px);
       border-radius: 16px;
-      overflow:hidden;
-      min-height:150px;
+      padding:14px;
     }
-    .shot img{width:100%;height:100%;object-fit:cover;display:block}
+    .mediaCaption strong{display:block;font-size:16px;margin-bottom:6px}
+    .mediaCaption span{display:block;color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.45}
+
     footer{
-      margin-top:22px;
-      padding:18px 2px 6px;
+      margin-top:16px;
+      padding:12px 2px 6px;
       color:var(--muted);
       font-size:12.5px;
       display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      opacity:.9;
+      opacity:.95;
     }
+    footer a{opacity:.9}
+
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .hero h1{font-size:38px}
-      .imgTop{height:210px}
-      .section{grid-template-columns:1fr; }
-      .shot{min-height:190px}
+      .media{min-height: 360px}
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
       <div class="brand">
         <div class="logo">
-          <!-- 로고 파일 넣으면 보임: assets/logo.png -->
-          <img src="assets/logo.png" alt="DAISY 로고" onerror="this.style.display='none'" />
+          <!-- 로고가 없으면 그냥 빈 박스 -->
+          <img src="assets/logo.png" alt="DAISY 로고" onerror="this.style.display='none'">
         </div>
-        <h3>DAISY</h3>
+        <b>DAISY</b>
       </div>
       <div class="pill">관심사로 연결되는 동네 친구 🌼</div>
     </header>
 
     <div class="grid">
+      <!-- LEFT: 카피/설명 -->
       <section class="card hero">
-        <h1>심심할 때,<br/>동네 친구가 필요할 때</h1>
+        <h1>오늘, 동네 친구<br/>어때요?</h1>
+
         <p>
           퇴근 후 가볍게 한 잔, 주말 산책, 취미 이야기.<br/>
           <b>관심사</b>로 자연스럽게 연결되는 동네 친구를 <b>데이지</b>에서 찾아보세요.
@@ -180,51 +185,33 @@
         </ul>
 
         <div class="actions">
-          <!-- ✅ 여기를 "실제 로그인/가입 URL"로 바꾸면 끝 -->
-          <a class="btn primary" href="https://www.daisyprime.com/login">지금 시작하기</a>
+          <!-- ✅ “안으로 들어가기” = 기존 서비스 로그인/가입 URL -->
+          <a class="btn primary" href="https://www.daisyprime.com/login" target="_blank" rel="noopener">
+            지금 시작하기
+          </a>
           <a class="btn" href="#how">어떻게 쓰나요?</a>
         </div>
 
-        <div class="mini" style="margin-top:14px;">
+        <div id="how" class="mini">
           <span>① 관심사 선택 → ② 동네 친구 확인 → ③ 대화 시작</span>
         </div>
 
-        <div id="how" class="kpi" aria-label="사용 방법 요약">
-          <div>
-            <strong>관심사 선택</strong>
-            <span>대화가 편한 주제로 먼저 시작해요.</span>
-          </div>
-          <div>
-            <strong>동네 친구 확인</strong>
-            <span>가까운 곳에서 자연스러운 연결.</span>
-          </div>
-          <div>
-            <strong>대화 시작</strong>
-            <span>부담 없이 대화부터 해보세요.</span>
-          </div>
+        <div class="mini" style="margin-top:10px;">
+          <span>※ 시작하기를 누르면 로그인/가입 페이지로 이동해요.</span>
         </div>
       </section>
 
-      <aside class="card imgCard">
-        <div class="imgTop">
-          <!-- hero 이미지: assets/hero.jpg -->
-          <img src="assets/hero.jpg" alt="DAISY 분위기 이미지" onerror="this.style.display='none'" />
-        </div>
-        <div class="imgBody">
-          <strong style="display:block; font-size:16px; margin-bottom:8px;">오늘, 동네에서 누굴 만날까?</strong>
-          <div style="color:var(--muted); line-height:1.6; font-size:14.5px;">
-            관심사로 연결되는 가벼운 일상 대화.<br/>
-            광고 클릭 후 바로 이해되는 랜딩을 준비했어요.
+      <!-- RIGHT: 이미지(너가 준 6컷 광고 이미지) -->
+      <aside class="card media">
+        <div class="mediaTop">
+          <img src="assets/ad.jpg" alt="DAISY 광고 이미지">
+          <div class="overlay"></div>
+          <div class="mediaCaption">
+            <strong>심심할 때, 동네 친구</strong>
+            <span>가까운 곳에서 관심사로 연결되는 일상 대화. 부담 없이 시작해요.</span>
           </div>
         </div>
       </aside>
-    </div>
-
-    <div class="section" aria-label="이미지 섹션">
-      <!-- 아래 2장은 선택: 없으면 깨져 보일 수 있으니 assets에 넣는 걸 추천 -->
-      <div class="shot"><img src="assets/mock1.jpg" alt="DAISY 예시 이미지 1" onerror="this.parentElement.style.display='none'"/></div>
-      <div class="shot"><img src="assets/mock2.jpg" alt="DAISY 예시 이미지 2" onerror="this.parentElement.style.display='none'"/></div>
-      <div class="shot"><img src="assets/mock3.jpg" alt="DAISY 예시 이미지 3" onerror="this.parentElement.style.display='none'"/></div>
     </div>
 
     <footer>

@@ -26,7 +26,6 @@
       --radius: 24px;
       --accent: #f7d75d;
       --accent2:#8cffd0;
-      --danger:#ff5a5f;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -37,7 +36,8 @@
       background: linear-gradient(140deg, var(--bg0), var(--bg2));
       overflow-x:hidden;
     }
-    /* fancy background */
+
+    /* Fancy background (그럴싸한 분위기) */
     .bg{
       position:fixed; inset:0; z-index:-1;
       background:
@@ -48,14 +48,14 @@
     }
     .bg:before{
       content:"";
-      position:absolute; inset:-200px;
+      position:absolute; inset:-220px;
       background:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0 2px, transparent 3px) 0 0/38px 38px,
         radial-gradient(circle at 70% 60%, rgba(255,255,255,.045) 0 2px, transparent 3px) 0 0/54px 54px;
-      opacity:.55;
-      filter: blur(.2px);
+      opacity:.58;
       transform: rotate(-2deg);
       pointer-events:none;
+      filter: blur(.2px);
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -73,7 +73,7 @@
       user-select:none;
     }
     .mark{
-      width: 64px; height: 64px;   /* ✅ 로고 크게 */
+      width: 64px; height: 64px;  /* ✅ 로고 크게 */
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.10);
@@ -86,16 +86,19 @@
     .mark:after{
       content:"";
       position:absolute; inset:-1px;
-      background: radial-gradient(120px 120px at 30% 20%, rgba(247,215,93,.25), transparent 60%);
+      background: radial-gradient(140px 140px at 30% 20%, rgba(247,215,93,.25), transparent 60%);
       pointer-events:none;
     }
     .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
     .brandText{ display:flex; flex-direction:column; gap:4px; }
     .brandText .name{ font-weight: 950; letter-spacing: .3px; font-size: 18px; }
-    .brandText .tag{ font-size: 12.8px; color: var(--muted); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .brandText .tag{
+      font-size: 12.8px; color: var(--muted);
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    }
     .tapHint{
       font-size: 12px;
-      color: rgba(255,255,255,.76);
+      color: rgba(255,255,255,.78);
       border:1px solid rgba(255,255,255,.16);
       background: rgba(0,0,0,.18);
       padding: 6px 10px;
@@ -236,6 +239,40 @@
     .heroCaption strong{ display:block; margin-bottom: 6px; font-size: 16px; }
     .heroCaption span{ color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.45; display:block; }
 
+    /* ✅ 오른쪽 카드 안 “↘ 클릭 안내” */
+    .guide{
+      position:absolute;
+      right: 14px;
+      bottom: 92px; /* 위젯 위치 올리는 값과 맞춤 */
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      cursor:pointer;
+      user-select:none;
+    }
+    .arrow{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(247,215,93,.35);
+      background: rgba(247,215,93,.18);
+      color: var(--accent);
+      font-weight: 950;
+    }
+    .pulse{ animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse{
+      0%,100%{ transform: translateY(0); opacity: .92; }
+      50%{ transform: translateY(-3px); opacity: 1; }
+    }
+
     /* Sections */
     .sectionTitle{
       margin: 18px 0 10px;
@@ -309,7 +346,7 @@
     /* Footer */
     footer{
       margin-top: 18px;
-      padding: 14px 4px 68px; /* ✅ 하단 고정바 공간 */
+      padding: 14px 4px 6px; /* ✅ 하단 바 없으니 원래대로 */
       color: var(--muted);
       font-size: 12.5px;
       display:flex;
@@ -319,46 +356,6 @@
       opacity: .95;
     }
     footer a{ text-decoration: underline; opacity: .92; }
-
-    /* Bottom fixed CTA (모바일/데스크탑 모두) */
-    .fixedBar{
-      position: fixed;
-      left: 12px; right: 12px; bottom: 12px;
-      z-index: 9998;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.36);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 22px 90px rgba(0,0,0,.45);
-    }
-    .fixedLeft{
-      display:flex;
-      flex-direction:column;
-      gap: 2px;
-      min-width: 0;
-    }
-    .fixedLeft b{ font-size: 13.5px; }
-    .fixedLeft span{ font-size: 12.5px; color: rgba(255,255,255,.74); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .fixedActions{ display:flex; gap: 8px; flex:0 0 auto; }
-    .btnSmall{
-      padding: 10px 12px;
-      border-radius: 14px;
-      font-weight: 950;
-      border: 1px solid rgba(255,255,255,.20);
-      background: rgba(255,255,255,.08);
-      color: var(--text);
-      cursor:pointer;
-    }
-    .btnSmall.primary{
-      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.78));
-      border-color: rgba(247,215,93,.55);
-      color: #1b1b1b;
-    }
 
     /* modal */
     .modalBg{
@@ -399,6 +396,7 @@
       .two{ grid-template-columns: 1fr; }
       .chipRow{ justify-content:flex-start; }
       .brand{ min-width: 0; }
+      .guide{ bottom: 78px; }
     }
   </style>
 </head>
@@ -420,7 +418,7 @@
           <div class="name">DAISY</div>
           <div class="tag">
             관심사로 연결되는 동네 친구
-            <span class="tapHint">⬇️ 아래 “채팅하기” 눌러주세요</span>
+            <span class="tapHint">↘ 오른쪽 아래 로고 클릭</span>
           </div>
         </div>
       </div>
@@ -454,8 +452,8 @@
         </div>
 
         <div class="micro">
-          <span>💬 채팅은 <b>오른쪽 아래 아이콘</b>에서 시작돼요</span>
-          <span>🧩 아이콘이 안 보이면 광고 차단 확장을 꺼주세요</span>
+          <span>💬 채팅은 <b>오른쪽 아래 로고</b>에서 시작돼요</span>
+          <span>🧩 로고가 안 보이면 광고 차단 확장을 꺼주세요</span>
         </div>
       </section>
 
@@ -466,6 +464,12 @@
         <div class="heroBadge">
           <div class="mini">🌼 <b>DAISY</b> 랜딩</div>
           <div class="mini">가까운 곳에서, 가볍게</div>
+        </div>
+
+        <!-- ✅ 화살표 안내 -->
+        <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
+          <div class="arrow">↘</div>
+          <div><b>오른쪽 아래 로고</b> 눌러 채팅 시작</div>
         </div>
 
         <div class="heroCaption">
@@ -515,7 +519,11 @@
 
         <div class="callout">
           ✅ 앱/로그인 화면을 보여줄 필요 없어요.<br/>
-          아래 <b>“채팅하기” 버튼</b>을 누르면 안내가 떠요.
+          <b>오른쪽 아래 로고</b>를 누르면 바로 시작돼요 🙂
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn primary" type="button" onclick="guideChat()">채팅 시작 안내 보기</button>
         </div>
       </section>
 
@@ -526,6 +534,11 @@
         <div class="callout" style="margin-top:12px;">
           <b>추천 메시지</b><br/>
           “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요. 동네 친구 연결 문의드려요 🙂”
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn" type="button" onclick="copyTemplate()">추천 메시지 복사</button>
+          <button class="btn" type="button" onclick="guideChat()">채팅 안내</button>
         </div>
 
         <div class="callout" style="margin-top:12px;">
@@ -547,25 +560,13 @@
 
   </div>
 
-  <!-- ✅ 하단 고정 CTA -->
-  <div class="fixedBar" role="region" aria-label="문의 고정 바">
-    <div class="fixedLeft">
-      <b>지금 바로 문의하세요</b>
-      <span>오른쪽 아래 채팅 아이콘에서 상담이 시작돼요 🙂</span>
-    </div>
-    <div class="fixedActions">
-      <button class="btnSmall" type="button" onclick="copyTemplate()">템플릿</button>
-      <button class="btnSmall primary" type="button" onclick="guideChat()">채팅하기</button>
-    </div>
-  </div>
-
   <!-- 안내 모달 -->
   <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
     <div class="modal">
       <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
       <h4>채팅은 이렇게 시작해요</h4>
       <p>
-        화면 <b>오른쪽 아래</b>에 있는 <b>채팅 아이콘</b>을 눌러주세요 🙂<br/>
+        화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂<br/>
         아이콘이 안 보이면 <b>광고 차단 확장(AdBlock/uBlock)</b> 또는 브라우저 설정 때문에 가려질 수 있어요.
       </p>
       <div class="row">
@@ -605,6 +606,47 @@
         guideChat();
       }
     }
+
+    // ✅ 위젯(오른쪽 아래 채팅 런처) 위치를 조금 위로 올리기
+    function liftChatWidget(){
+      const targets = [];
+
+      // 1) salessmartly 관련 iframe
+      document.querySelectorAll('iframe').forEach(ifr=>{
+        const src = (ifr.getAttribute('src')||'').toLowerCase();
+        if (src.includes('salessmartly') || src.includes('salesmartly') || src.includes('plugin-code.salesmartly.com')){
+          targets.push(ifr);
+        }
+      });
+
+      // 2) 화면 우하단 fixed 요소 중 작은 런처 추리기
+      document.querySelectorAll('body *').forEach(el=>{
+        const st = getComputedStyle(el);
+        if (st.position !== 'fixed') return;
+
+        const r = el.getBoundingClientRect();
+        const isBottomRight = (r.right > window.innerWidth - 20) && (r.bottom > window.innerHeight - 20);
+        const isSmall = (r.width <= 140 && r.height <= 140) || (r.width <= 240 && r.height <= 90);
+        if (isBottomRight && isSmall) targets.push(el);
+      });
+
+      // 중복 제거
+      const uniq = Array.from(new Set(targets));
+
+      uniq.forEach(el=>{
+        try{
+          el.style.bottom = '92px';
+          el.style.zIndex = '9999';
+        }catch(e){}
+      });
+    }
+
+    window.addEventListener('load', ()=>{
+      liftChatWidget();
+      setTimeout(liftChatWidget, 700);
+      setTimeout(liftChatWidget, 1600);
+      setTimeout(liftChatWidget, 2600);
+    });
   </script>
 </body>
 </html>

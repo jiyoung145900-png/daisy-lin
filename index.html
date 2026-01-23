@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
   <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
-  <!-- ✅ OG 이미지는 현재 랜딩 도메인 기준으로 맞추는 걸 추천 -->
+  <!-- ✅ GitHub Pages/정적호스팅이면 /ad.jpg 로 OK (같은 레포 루트에 ad.jpg) -->
   <meta property="og:image" content="/ad.jpg" />
 
   <style>
@@ -199,13 +199,21 @@
       position:relative;
     }
 
-    .heroRight{ position:relative; min-height: 460px; }
-    .heroRight img{
-      width:100%; height:100%;
-      object-fit: cover;
+    /* ✅ 오른쪽 Hero 이미지: 와이드 이미지 꽉 차게 + 얼굴 위치 조절 */
+    .heroRight{
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+    }
+    .heroImg{
+      width:100%;
+      height:100%;
+      object-fit: cover;           /* 꽉 채우되 비율 유지 */
+      object-position: 60% center; /* 얼굴 잘림 조절 (50~70%로 조절) */
       display:block;
       filter: saturate(1.06) contrast(1.02);
     }
+
     .heroOverlay{
       position:absolute; inset:0;
       background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.66));
@@ -390,7 +398,7 @@
       font-weight: 900;
     }
 
-    /* ✅ 토스트(알림) */
+    /* ✅ 토스트 */
     .toast{
       position: fixed;
       left: 50%;
@@ -433,7 +441,6 @@
     <div class="top">
       <div class="brand" onclick="guideChat()" title="채팅 안내 보기">
         <div class="mark" aria-label="DAISY 로고">
-          <!-- ✅ 루트 절대경로 -->
           <img src="/logo.png" alt="DAISY"
                onerror="this.style.display='none';var t=document.getElementById('textLogo'); if(t) t.style.display='block';">
           <div id="textLogo" style="display:none;font-weight:950;letter-spacing:.2px;">DAISY</div>
@@ -483,8 +490,7 @@
       </section>
 
       <aside class="card heroRight">
-        <!-- ✅ 루트 절대경로 -->
-        <img src="/ad.jpg" alt="DAISY 광고 이미지">
+        <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
         <div class="heroOverlay"></div>
 
         <div class="heroBadge">
@@ -567,7 +573,6 @@
         </div>
 
         <div class="callout" style="margin-top:12px;">
-          <!-- ✅ 너 파일이 hero.png라서 여기 수정 -->
           <img src="/hero.png" alt="DAISY 분위기 이미지"
                style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
                onerror="this.style.display='none'">
@@ -604,9 +609,11 @@
     </div>
   </div>
 
-  <!-- ✅ SalesSmartly: 위젯 로딩(중복 방지: 1번만 로드) -->
+  <!-- ✅ SalesSmartly: 위젯 로딩 (중복 로드 방지) -->
   <script>
     (function () {
+      if (window.__DAISY_SM_LOADED__) return;
+      window.__DAISY_SM_LOADED__ = true;
       var s = document.createElement("script");
       s.src = "https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js";
       s.async = true;
@@ -628,9 +635,9 @@
     }
 
     function guideChat(){
-      // 안내 모달 + (가능하면) 클릭 시도
       openModal();
       try{
+        // 위젯이 버튼 요소로 떠있으면 클릭 시도 (환경에 따라 실패할 수 있음)
         const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
         if (btn) btn.click();
       }catch(e){}
@@ -639,13 +646,8 @@
     function copyTemplate(){
       const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동/전시]예요. 동네 친구 연결 문의드려요 🙂";
       if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(msg).then(()=>{
-          toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 해주세요 🙂");
-          guideChat();
-        }).catch(()=>{
-          prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
-          guideChat();
-        });
+        navigator.clipboard.writeText(msg).then(()=>{ toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 🙂"); guideChat(); })
+        .catch(()=>{ prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg); guideChat(); });
       } else {
         prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
         guideChat();

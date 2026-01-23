@@ -11,22 +11,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
   <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
-  <meta property="og:image" content="https://daisy-chat.com/ad.jpg" />
+  <!-- ✅ OG 이미지는 현재 랜딩 도메인 기준으로 맞추는 걸 추천 -->
+  <meta property="og:image" content="/ad.jpg" />
 
   <style>
     :root{
       --bg0:#04140e;
-      --bg1:#062118;
       --bg2:#0b3023;
-      --card: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.10);
-      --line: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --shadow: 0 18px 70px rgba(0,0,0,.38);
       --radius: 24px;
       --accent: #f7d75d;
-      --accent2:#8cffd0;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -38,7 +34,7 @@
       overflow-x:hidden;
     }
 
-    /* Fancy background (그럴싸한 분위기) */
+    /* Fancy background */
     .bg{
       position:fixed; inset:0; z-index:-1;
       background:
@@ -74,7 +70,7 @@
       user-select:none;
     }
     .mark{
-      width: 64px; height: 64px;  /* ✅ 로고 크게 */
+      width: 64px; height: 64px;
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.10);
@@ -181,13 +177,18 @@
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.26); }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.78));
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.80));
       border-color: rgba(247,215,93,.55);
       color: #1b1b1b;
+      padding: 16px 22px;
+      font-size: 17px;
+      border-radius: 18px;
+      box-shadow: 0 16px 50px rgba(247,215,93,.22);
     }
     .btn.primary:hover{
-      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.86));
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.88));
     }
+
     .micro{
       margin-top: 12px;
       color: rgba(255,255,255,.76);
@@ -240,11 +241,11 @@
     .heroCaption strong{ display:block; margin-bottom: 6px; font-size: 16px; }
     .heroCaption span{ color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.45; display:block; }
 
-    /* ✅ 오른쪽 카드 안 “↘ 클릭 안내” */
+    /* ✅ 안내 배지(위젯과 안 겹치게) */
     .guide{
       position:absolute;
       right: 14px;
-      bottom: 92px; /* 위젯 위치 올리는 값과 맞춤 */
+      bottom: 140px;
       display:flex;
       align-items:center;
       gap: 10px;
@@ -347,7 +348,7 @@
     /* Footer */
     footer{
       margin-top: 18px;
-      padding: 14px 4px 6px; /* ✅ 하단 바 없으니 원래대로 */
+      padding: 14px 4px 6px;
       color: var(--muted);
       font-size: 12.5px;
       display:flex;
@@ -389,6 +390,26 @@
       font-weight: 900;
     }
 
+    /* ✅ 토스트(알림) */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.92);
+      font-size: 13px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      max-width: min(92vw, 560px);
+      text-align:center;
+    }
+
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
       h1{ font-size: 38px; }
@@ -397,7 +418,8 @@
       .two{ grid-template-columns: 1fr; }
       .chipRow{ justify-content:flex-start; }
       .brand{ min-width: 0; }
-      .guide{ bottom: 78px; }
+      .guide{ bottom: 120px; }
+      .btn.primary{ width: 100%; }
     }
   </style>
 </head>
@@ -407,12 +429,13 @@
 
   <div class="wrap">
 
-    <!-- Top (로고 크게 + 클릭 안내) -->
+    <!-- Top -->
     <div class="top">
       <div class="brand" onclick="guideChat()" title="채팅 안내 보기">
         <div class="mark" aria-label="DAISY 로고">
-          <img src="logo.png" alt="DAISY"
-               onerror="this.style.display='none';document.getElementById('textLogo').style.display='block';">
+          <!-- ✅ 루트 절대경로 -->
+          <img src="/logo.png" alt="DAISY"
+               onerror="this.style.display='none';var t=document.getElementById('textLogo'); if(t) t.style.display='block';">
           <div id="textLogo" style="display:none;font-weight:950;letter-spacing:.2px;">DAISY</div>
         </div>
         <div class="brandText">
@@ -448,18 +471,20 @@
 
         <div class="actions">
           <button class="btn primary" type="button" onclick="guideChat()">지금 채팅으로 문의하기</button>
-          <a class="btn" href="#how">어떻게 쓰나요?</a>
+          <a class="btn" href="#how">내 동네/관심사 고르기</a>
           <button class="btn" type="button" onclick="copyTemplate()">문의 템플릿 복사</button>
         </div>
 
         <div class="micro">
           <span>💬 채팅은 <b>오른쪽 아래 로고</b>에서 시작돼요</span>
           <span>🧩 로고가 안 보이면 광고 차단 확장을 꺼주세요</span>
+          <span>⏱️ 로그인 없이 · 30초 시작</span>
         </div>
       </section>
 
       <aside class="card heroRight">
-        <img src="ad.jpg" alt="DAISY 광고 이미지">
+        <!-- ✅ 루트 절대경로 -->
+        <img src="/ad.jpg" alt="DAISY 광고 이미지">
         <div class="heroOverlay"></div>
 
         <div class="heroBadge">
@@ -467,7 +492,6 @@
           <div class="mini">가까운 곳에서, 가볍게</div>
         </div>
 
-        <!-- ✅ 화살표 안내 -->
         <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
           <div class="arrow">↘</div>
           <div><b>오른쪽 아래 로고</b> 눌러 채팅 시작</div>
@@ -543,7 +567,8 @@
         </div>
 
         <div class="callout" style="margin-top:12px;">
-          <img src="hero.jpg" alt="DAISY 분위기 이미지"
+          <!-- ✅ 너 파일이 hero.png라서 여기 수정 -->
+          <img src="/hero.png" alt="DAISY 분위기 이미지"
                style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
                onerror="this.style.display='none'">
         </div>
@@ -553,13 +578,16 @@
     <!-- Footer -->
     <footer>
       <div>
-        <a href="privacy.html">개인정보처리방침</a> ·
-        <a href="terms.html">이용약관</a>
+        <a href="/privacy.html">개인정보처리방침</a> ·
+        <a href="/terms.html">이용약관</a>
       </div>
       <div>© DAISY</div>
     </footer>
 
   </div>
+
+  <!-- 토스트 -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- 안내 모달 -->
   <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
@@ -576,15 +604,31 @@
     </div>
   </div>
 
-  <!-- ✅ SalesSmartly: 웹사이트 채팅 위젯 -->
-  <script src="https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js"></script>
+  <!-- ✅ SalesSmartly: 위젯 로딩(중복 방지: 1번만 로드) -->
+  <script>
+    (function () {
+      var s = document.createElement("script");
+      s.src = "https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js";
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
 
   <script>
     function openModal(){ document.getElementById('modalBg').style.display='flex'; }
     function closeModal(){ document.getElementById('modalBg').style.display='none'; }
 
+    function toast(msg){
+      var el = document.getElementById("toast");
+      if(!el) return;
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(function(){ el.style.display="none"; }, 2400);
+    }
+
     function guideChat(){
-      // 위젯 강제 오픈이 막힐 수 있어서 안내 모달 + (가능하면) 클릭 시도
+      // 안내 모달 + (가능하면) 클릭 시도
       openModal();
       try{
         const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
@@ -596,7 +640,7 @@
       const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동/전시]예요. 동네 친구 연결 문의드려요 🙂";
       if (navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(msg).then(()=>{
-          alert("추천 메시지를 복사했어요! 채팅창에 붙여넣기 해주세요 🙂");
+          toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 해주세요 🙂");
           guideChat();
         }).catch(()=>{
           prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
@@ -607,47 +651,6 @@
         guideChat();
       }
     }
-
-    // ✅ 위젯(오른쪽 아래 채팅 런처) 위치를 조금 위로 올리기
-    function liftChatWidget(){
-      const targets = [];
-
-      // 1) salessmartly 관련 iframe
-      document.querySelectorAll('iframe').forEach(ifr=>{
-        const src = (ifr.getAttribute('src')||'').toLowerCase();
-        if (src.includes('salessmartly') || src.includes('salesmartly') || src.includes('plugin-code.salesmartly.com')){
-          targets.push(ifr);
-        }
-      });
-
-      // 2) 화면 우하단 fixed 요소 중 작은 런처 추리기
-      document.querySelectorAll('body *').forEach(el=>{
-        const st = getComputedStyle(el);
-        if (st.position !== 'fixed') return;
-
-        const r = el.getBoundingClientRect();
-        const isBottomRight = (r.right > window.innerWidth - 20) && (r.bottom > window.innerHeight - 20);
-        const isSmall = (r.width <= 140 && r.height <= 140) || (r.width <= 240 && r.height <= 90);
-        if (isBottomRight && isSmall) targets.push(el);
-      });
-
-      // 중복 제거
-      const uniq = Array.from(new Set(targets));
-
-      uniq.forEach(el=>{
-        try{
-          el.style.bottom = '92px';
-          el.style.zIndex = '9999';
-        }catch(e){}
-      });
-    }
-
-    window.addEventListener('load', ()=>{
-      liftChatWidget();
-      setTimeout(liftChatWidget, 700);
-      setTimeout(liftChatWidget, 1600);
-      setTimeout(liftChatWidget, 2600);
-    });
   </script>
 </body>
 </html>

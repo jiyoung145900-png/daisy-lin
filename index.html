@@ -1,1 +1,659 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="facebook-domain-verification" content="v4fatztkiz3g57ba7kzedot89rjdsc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DAISY | 관심사로 연결되는 동네 친구</title>
+  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (일상 대화/취미 중심)" />
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
+  <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
+  <!-- ✅ GitHub Pages/정적호스팅이면 /ad.jpg 로 OK (같은 레포 루트에 ad.jpg) -->
+  <meta property="og:image" content="/ad.jpg" />
+
+  <style>
+    :root{
+      --bg0:#04140e;
+      --bg2:#0b3023;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --shadow: 0 18px 70px rgba(0,0,0,.38);
+      --radius: 24px;
+      --accent: #f7d75d;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--text);
+      background: linear-gradient(140deg, var(--bg0), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Fancy background */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(1100px 800px at 16% 10%, rgba(247,215,93,.18), transparent 60%),
+        radial-gradient(1100px 800px at 86% 12%, rgba(140,255,208,.14), transparent 62%),
+        radial-gradient(900px 700px at 40% 110%, rgba(255,255,255,.08), transparent 55%),
+        linear-gradient(140deg, var(--bg0), var(--bg2));
+    }
+    .bg:before{
+      content:"";
+      position:absolute; inset:-220px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0 2px, transparent 3px) 0 0/38px 38px,
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.045) 0 2px, transparent 3px) 0 0/54px 54px;
+      opacity:.58;
+      transform: rotate(-2deg);
+      pointer-events:none;
+      filter: blur(.2px);
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: 1120px; margin: 0 auto; padding: 26px; }
+
+    /* Top */
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px; margin-bottom: 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 14px;
+      min-width: 240px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .mark{
+      width: 64px; height: 64px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 18px 48px rgba(0,0,0,.26);
+      overflow:hidden;
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      position:relative;
+    }
+    .mark:after{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(140px 140px at 30% 20%, rgba(247,215,93,.25), transparent 60%);
+      pointer-events:none;
+    }
+    .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .brandText{ display:flex; flex-direction:column; gap:4px; }
+    .brandText .name{ font-weight: 950; letter-spacing: .3px; font-size: 18px; }
+    .brandText .tag{
+      font-size: 12.8px; color: var(--muted);
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    }
+    .tapHint{
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    /* Cards */
+    .card{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .heroLeft{ padding: 26px; position:relative; }
+    .heroLeft:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 360px at 20% 10%, rgba(247,215,93,.14), transparent 60%);
+      pointer-events:none;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: 46px;
+      letter-spacing: -0.8px;
+      line-height: 1.05;
+      position:relative;
+    }
+    .lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16.5px;
+      line-height: 1.7;
+      position:relative;
+    }
+    .points{
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14.5px;
+      position:relative;
+    }
+
+    .actions{ display:flex; gap: 10px; flex-wrap:wrap; align-items:center; position:relative; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight: 950;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.26); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.80));
+      border-color: rgba(247,215,93,.55);
+      color: #1b1b1b;
+      padding: 16px 22px;
+      font-size: 17px;
+      border-radius: 18px;
+      box-shadow: 0 16px 50px rgba(247,215,93,.22);
+    }
+    .btn.primary:hover{
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.88));
+    }
+
+    .micro{
+      margin-top: 12px;
+      color: rgba(255,255,255,.76);
+      font-size: 12.8px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      position:relative;
+    }
+
+    /* ✅ 오른쪽 Hero 이미지: 와이드 이미지 꽉 차게 + 얼굴 위치 조절 */
+    .heroRight{
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+    }
+    .heroImg{
+      width:100%;
+      height:100%;
+      object-fit: cover;           /* 꽉 채우되 비율 유지 */
+      object-position: 60% center; /* 얼굴 잘림 조절 (50~70%로 조절) */
+      display:block;
+      filter: saturate(1.06) contrast(1.02);
+    }
+
+    .heroOverlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.66));
+      pointer-events:none;
+    }
+    .heroBadge{
+      position:absolute;
+      top: 14px; left: 14px; right: 14px;
+      display:flex; justify-content:space-between; gap: 10px; align-items:center;
+    }
+    .mini{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.24);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.84);
+      display:inline-flex; align-items:center; gap:8px;
+      white-space: nowrap;
+    }
+    .mini b{ color: var(--accent); }
+
+    .heroCaption{
+      position:absolute;
+      left: 14px; right: 14px; bottom: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 14px 14px;
+    }
+    .heroCaption strong{ display:block; margin-bottom: 6px; font-size: 16px; }
+    .heroCaption span{ color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.45; display:block; }
+
+    /* ✅ 안내 배지(위젯과 안 겹치게) */
+    .guide{
+      position:absolute;
+      right: 14px;
+      bottom: 140px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      cursor:pointer;
+      user-select:none;
+    }
+    .arrow{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(247,215,93,.35);
+      background: rgba(247,215,93,.18);
+      color: var(--accent);
+      font-weight: 950;
+    }
+    .pulse{ animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse{
+      0%,100%{ transform: translateY(0); opacity: .92; }
+      50%{ transform: translateY(-3px); opacity: 1; }
+    }
+
+    /* Sections */
+    .sectionTitle{
+      margin: 18px 0 10px;
+      font-size: 15px;
+      color: rgba(255,255,255,.86);
+      letter-spacing: .2px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tile{
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      border-radius: 18px;
+    }
+    .tile b{ display:block; margin-bottom: 6px; }
+    .tile p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.58; }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .panel{ padding: 18px; }
+    .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
+    .panel p{ margin:0; color: var(--muted); line-height:1.65; font-size: 14.5px; }
+
+    .steps{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style:none;
+      display:grid;
+      gap: 10px;
+    }
+    .step{
+      display:flex; gap:10px; align-items:flex-start;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .num{
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(247,215,93,.35);
+      background: rgba(247,215,93,.18);
+      color: var(--accent);
+      font-weight: 950;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+    .step b{ display:block; margin-bottom: 2px; }
+    .step span{ display:block; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+
+    .callout{
+      margin-top: 12px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      border-radius: 16px;
+      padding: 12px;
+      color: rgba(255,255,255,.80);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      padding: 14px 4px 6px;
+      color: var(--muted);
+      font-size: 12.5px;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: .95;
+    }
+    footer a{ text-decoration: underline; opacity: .92; }
+
+    /* modal */
+    .modalBg{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.58);
+      display:none;
+      align-items:center; justify-content:center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      width: min(560px, 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(10,18,14,.92);
+      box-shadow: 0 30px 120px rgba(0,0,0,.58);
+      padding: 16px;
+    }
+    .modal h4{ margin: 0 0 8px; font-size: 17px; }
+    .modal p{ margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+    .modal .row{ display:flex; gap:10px; justify-content:flex-end; margin-top: 12px; flex-wrap:wrap; }
+    .x{
+      float:right;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 900;
+    }
+
+    /* ✅ 토스트 */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.92);
+      font-size: 13px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      max-width: min(92vw, 560px);
+      text-align:center;
+    }
+
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      h1{ font-size: 38px; }
+      .heroRight{ min-height: 360px; }
+      .grid3{ grid-template-columns: 1fr; }
+      .two{ grid-template-columns: 1fr; }
+      .chipRow{ justify-content:flex-start; }
+      .brand{ min-width: 0; }
+      .guide{ bottom: 120px; }
+      .btn.primary{ width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="wrap">
+
+    <!-- Top -->
+    <div class="top">
+      <div class="brand" onclick="guideChat()" title="채팅 안내 보기">
+        <div class="mark" aria-label="DAISY 로고">
+          <img src="/logo.png" alt="DAISY"
+               onerror="this.style.display='none';var t=document.getElementById('textLogo'); if(t) t.style.display='block';">
+          <div id="textLogo" style="display:none;font-weight:950;letter-spacing:.2px;">DAISY</div>
+        </div>
+        <div class="brandText">
+          <div class="name">DAISY</div>
+          <div class="tag">
+            관심사로 연결되는 동네 친구
+            <span class="tapHint">↘ 오른쪽 아래 로고 클릭</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chipRow">
+        <div class="chip">✅ 로그인 없이 문의</div>
+        <div class="chip">✅ 일상 대화/취미 중심</div>
+        <div class="chip">✅ 가까운 동네 연결</div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <section class="card heroLeft">
+        <h1>오늘, 동네 친구<br/>어때요?</h1>
+        <p class="lead">
+          심심할 때 가볍게 대화하고, 퇴근 후 산책이나 커피 한 잔을 함께할
+          <b>가까운 동네 친구</b>를 찾아보세요.
+        </p>
+
+        <ul class="points">
+          <li><b>데이팅 목적이 아닌</b> 일상 대화 중심</li>
+          <li>거리보다 <b>관심사</b>로 먼저 연결</li>
+          <li>부담 없이 <b>대화부터</b> 시작</li>
+        </ul>
+
+        <div class="actions">
+          <button class="btn primary" type="button" onclick="guideChat()">지금 채팅으로 문의하기</button>
+          <a class="btn" href="#how">내 동네/관심사 고르기</a>
+          <button class="btn" type="button" onclick="copyTemplate()">문의 템플릿 복사</button>
+        </div>
+
+        <div class="micro">
+          <span>💬 채팅은 <b>오른쪽 아래 로고</b>에서 시작돼요</span>
+          <span>🧩 로고가 안 보이면 광고 차단 확장을 꺼주세요</span>
+          <span>⏱️ 로그인 없이 · 30초 시작</span>
+        </div>
+      </section>
+
+      <aside class="card heroRight">
+        <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
+        <div class="heroOverlay"></div>
+
+        <div class="heroBadge">
+          <div class="mini">🌼 <b>DAISY</b> 랜딩</div>
+          <div class="mini">가까운 곳에서, 가볍게</div>
+        </div>
+
+        <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
+          <div class="arrow">↘</div>
+          <div><b>오른쪽 아래 로고</b> 눌러 채팅 시작</div>
+        </div>
+
+        <div class="heroCaption">
+          <strong>심심할 때, 동네 친구</strong>
+          <span>관심사로 연결되는 일상 대화. 부담 없이 시작해요.</span>
+        </div>
+      </aside>
+    </div>
+
+    <!-- For who -->
+    <div class="sectionTitle">데이지는 이런 분께 잘 맞아요</div>
+    <div class="grid3">
+      <div class="tile">
+        <b>퇴근 후, 가볍게</b>
+        <p>맥주 한 잔, 산책, 커피처럼 부담 없는 만남부터 시작해요.</p>
+      </div>
+      <div class="tile">
+        <b>새로운 동네 생활</b>
+        <p>이사/새로운 환경에서 동네 친구가 필요할 때 도움돼요.</p>
+      </div>
+      <div class="tile">
+        <b>관심사로 연결</b>
+        <p>주제(취미/산책/카페/운동/전시)로 먼저 얘기하니 편해요.</p>
+      </div>
+    </div>
+
+    <!-- How -->
+    <div id="how" class="two">
+      <section class="card panel">
+        <h3>어떻게 시작하나요?</h3>
+        <p>아래 순서대로 간단히 알려주면 연결 안내를 도와드려요.</p>
+
+        <ul class="steps">
+          <li class="step">
+            <div class="num">1</div>
+            <div><b>동네</b><span>예: 강남 / 성수 / 잠실 / 홍대</span></div>
+          </li>
+          <li class="step">
+            <div class="num">2</div>
+            <div><b>관심사</b><span>예: 산책 / 카페 / 맥주 / 운동 / 전시</span></div>
+          </li>
+          <li class="step">
+            <div class="num">3</div>
+            <div><b>상담</b><span>필요한 정보만 확인 후 안내해요.</span></div>
+          </li>
+        </ul>
+
+        <div class="callout">
+          ✅ 앱/로그인 화면을 보여줄 필요 없어요.<br/>
+          <b>오른쪽 아래 로고</b>를 누르면 바로 시작돼요 🙂
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn primary" type="button" onclick="guideChat()">채팅 시작 안내 보기</button>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <h3>무엇을 문의하면 되나요?</h3>
+        <p>광고 클릭 후 바로 이해되도록, 아래처럼 보내면 충분해요.</p>
+
+        <div class="callout" style="margin-top:12px;">
+          <b>추천 메시지</b><br/>
+          “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요. 동네 친구 연결 문의드려요 🙂”
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn" type="button" onclick="copyTemplate()">추천 메시지 복사</button>
+          <button class="btn" type="button" onclick="guideChat()">채팅 안내</button>
+        </div>
+
+        <div class="callout" style="margin-top:12px;">
+          <img src="/hero.jpg" alt="DAISY 분위기 이미지"
+               style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);display:block;"
+               onerror="this.style.display='none'">
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        <a href="/privacy.html">개인정보처리방침</a> ·
+        <a href="/terms.html">이용약관</a>
+      </div>
+      <div>© DAISY</div>
+    </footer>
+
+  </div>
+
+  <!-- 토스트 -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- 안내 모달 -->
+  <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
+    <div class="modal">
+      <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
+      <h4>채팅은 이렇게 시작해요</h4>
+      <p>
+        화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂<br/>
+        아이콘이 안 보이면 <b>광고 차단 확장(AdBlock/uBlock)</b> 또는 브라우저 설정 때문에 가려질 수 있어요.
+      </p>
+      <div class="row">
+        <button class="btn primary" type="button" onclick="closeModal()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ SalesSmartly: 위젯 로딩 (중복 로드 방지) -->
+  <script>
+    (function () {
+      if (window.__DAISY_SM_LOADED__) return;
+      window.__DAISY_SM_LOADED__ = true;
+      var s = document.createElement("script");
+      s.src = "https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js";
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+
+  <script>
+    function openModal(){ document.getElementById('modalBg').style.display='flex'; }
+    function closeModal(){ document.getElementById('modalBg').style.display='none'; }
+
+    function toast(msg){
+      var el = document.getElementById("toast");
+      if(!el) return;
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(function(){ el.style.display="none"; }, 2400);
+    }
+
+    function guideChat(){
+      openModal();
+      try{
+        // 위젯이 버튼 요소로 떠있으면 클릭 시도 (환경에 따라 실패할 수 있음)
+        const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
+        if (btn) btn.click();
+      }catch(e){}
+    }
+
+    function copyTemplate(){
+      const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동/전시]예요. 동네 친구 연결 문의드려요 🙂";
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(msg).then(()=>{ toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 🙂"); guideChat(); })
+        .catch(()=>{ prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg); guideChat(); });
+      } else {
+        prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
+        guideChat();
+      }
+    }
+  </script>
+</body>
+</html>
+자 그럼 이거 지금 코든데 너 믿고 한번 맡겨볼게 싹고쳐서 완성본으로 부탁해

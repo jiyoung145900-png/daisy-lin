@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      /* ✅ 밝은 데이지 톤 (구조/레이아웃 유지, 색만 밝게) */
+      /* ✅ 밝은 데이지 톤 */
       --bg0:#f6fff6;
       --bg2:#e9fff2;
 
@@ -28,8 +28,8 @@
       --shadow: 0 18px 70px rgba(0,0,0,.10);
       --radius: 24px;
 
-      --accent: #f7d75d;      /* DAISY 노랑 */
-      --accent2: #2fd7a7;     /* 민트(밝게) */
+      --accent: #f7d75d;
+      --accent2: #2fd7a7;
     }
 
     *{ box-sizing:border-box; }
@@ -115,32 +115,29 @@
       white-space: nowrap;
     }
 
-   .chipRow{
-  display: inline-flex;     /* ✅ 핵심: flex → inline-flex */
-  gap: 8px;
-  justify-content: flex-end;
-  align-items: center;
-  margin-left: auto;        /* ✅ 오른쪽에 붙이기 */
-  width: fit-content;       /* ✅ 내용만큼만 */
-  flex-wrap: nowrap;        /* ✅ 줄바꿈 금지 */
-}
-
-.chip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding: 6px 10px;
-  border: 1px solid rgba(20,30,22,.14);
-  background: rgba(255,255,255,.55);
-  border-radius: 999px;
-  color: rgba(20,30,22,.72);
-  font-size: 11px;
-  white-space: nowrap;
-
-  width: fit-content;       /* ✅ 얘도 내용만큼 */
-  flex: 0 0 auto;           /* ✅ 절대 늘어나지마 */
-}
-
+    /* ✅ 상단 칩 (짧게/안늘어나게) */
+    .chipRow{
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: auto;
+      width: fit-content;
+      flex-wrap: nowrap;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border: 1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.55);
+      border-radius: 999px;
+      color: rgba(20,30,22,.72);
+      font-size: 11px;
+      white-space: nowrap;
+      width: fit-content;
+      flex: 0 0 auto;
+    }
 
     /* Cards */
     .card{
@@ -179,7 +176,6 @@
       position:relative;
     }
 
-    /* ✅ 문장 짧게 */
     .lead{
       margin: 0 0 16px;
       color: var(--muted);
@@ -188,7 +184,6 @@
       position:relative;
     }
 
-    /* ✅ 포인트 3개 → 2개로 줄임 */
     .points{
       margin: 0 0 18px;
       padding-left: 18px;
@@ -235,7 +230,6 @@
       box-shadow: 0 16px 55px rgba(247,215,93,.22);
     }
 
-    /* ✅ 마이크로 문구 3줄 → 1줄만 */
     .micro{
       margin-top: 12px;
       color: rgba(20,30,22,.66);
@@ -246,7 +240,7 @@
       position:relative;
     }
 
-    /* ✅✅✅ 히어로 이미지 "칸에 딱 맞게" (여기만 안전하게 고정) */
+    /* ✅ 히어로 이미지 "칸에 딱 맞게" */
     .heroRight{
       position: relative;
       min-height: 460px;
@@ -264,7 +258,6 @@
       filter: saturate(1.03) contrast(1.01);
       transform:none;
     }
-
     .heroOverlay{
       position:absolute; inset:0;
       background:
@@ -273,47 +266,6 @@
       pointer-events:none;
     }
 
-    ```css
-/* ✅ HERO 상단 칩(배지) — 딱 내용만큼만(바처럼 안 늘어남) */
-.heroBadge{
-  position: absolute;
-  top: 14px;
-  left: 14px;
-
-  right: auto;              /* ✅ 전체폭 잡는거 제거 */
-  width: fit-content;       /* ✅ 내용만큼만 */
-  max-width: calc(100% - 28px);
-
-  display: flex;
-  justify-content: flex-start; /* ✅ space-between 제거 */
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;          /* 좁은 화면에서 줄바꿈 */
-}
-
-/* ✅ 배지(칩) 자체도 조금 슬림하게 */
-.mini{
-  border: 1px solid rgba(255,255,255,.55);
-  background: rgba(255,255,255,.40);
-  backdrop-filter: blur(10px);
-  border-radius: 999px;
-
-  padding: 6px 10px;        /* ✅ 슬림 */
-  font-size: 11px;          /* ✅ 작게 */
-  line-height: 1;
-
-  color: rgba(20,30,22,.82);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.mini b{ color: rgba(20,30,22,.92); }
-```
-
-
-    /* ✅ 캡션 짧게 + 밝게 */
     .heroCaption{
       position:absolute;
       left: 14px; right: 14px; bottom: 14px;
@@ -332,7 +284,6 @@
       display:block;
     }
 
-    /* ✅ 안내 배지(겹침 방지 그대로 유지) */
     .guide{
       position:absolute;
       right: 14px;
@@ -397,6 +348,7 @@
     .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
     .panel p{ margin:0; color: rgba(20,30,22,.64); line-height:1.65; font-size: 14.5px; }
 
+    .stepssteps,
     .steps{
       margin: 12px 0 0;
       padding: 0;
@@ -436,7 +388,7 @@
       line-height: 1.55;
     }
 
-    /* ✅ 2번째 이미지(유지) - 밝게 */
+    /* ✅ hero.jpg 프리뷰 */
     .previewBox{
       margin-top:12px;
       border-radius: 18px;
@@ -459,19 +411,26 @@
       display:block;
       filter: saturate(1.02) contrast(1.01);
     }
+
+    /* ✅✅ 하단 바 = 딱 내용만큼 (이게 핵심) */
     .previewCap{
       position:absolute;
       left: 12px;
-      right: 12px;
+      right: auto !important;
       bottom: 12px;
       z-index:2;
-      padding: 10px 12px;
-      border-radius: 16px;
+
+      width: fit-content !important;
+      max-width: calc(100% - 24px);
+
+      padding: 7px 12px;
+      border-radius: 999px;
       border:1px solid rgba(255,255,255,.55);
       background: rgba(255,255,255,.40);
       backdrop-filter: blur(10px);
       font-size: 13px;
       color: rgba(20,30,22,.82);
+      white-space: nowrap;
     }
 
     /* Footer */
@@ -608,10 +567,9 @@
       </section>
 
       <aside class="card heroRight">
-        <!-- ✅ 이미지 1 유지 -->
         <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
         <div class="heroOverlay"></div>
-    
+
         <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
           <div class="arrow">↘</div>
           <div><b>오른쪽 아래 로고</b> 눌러 시작</div>
@@ -676,7 +634,6 @@
           <button class="btn" type="button" onclick="guideChat()">채팅 열기</button>
         </div>
 
-        <!-- ✅ 이미지 2 유지 -->
         <div class="previewBox">
           <img src="/hero.jpg" class="previewImg" alt="DAISY 분위기 이미지"
                onerror="this.style.display='none'">
@@ -696,7 +653,6 @@
 
   </div>
 
-  <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- 안내 모달 -->
@@ -704,16 +660,14 @@
     <div class="modal">
       <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
       <h4>채팅 시작 방법</h4>
-      <p>
-        화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂
-      </p>
+      <p>화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂</p>
       <div class="row">
         <button class="btn primary" type="button" onclick="closeModal()">확인</button>
       </div>
     </div>
   </div>
 
-  <!-- ✅ SalesSmartly: 위젯 로딩 (중복 로드 방지) -->
+  <!-- ✅ SalesSmartly: 위젯 로딩 -->
   <script>
     (function () {
       if (window.__DAISY_SM_LOADED__) return;

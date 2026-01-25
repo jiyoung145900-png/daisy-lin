@@ -348,7 +348,7 @@
     .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
     .panel p{ margin:0; color: rgba(20,30,22,.64); line-height:1.65; font-size: 14.5px; }
 
-    .stepssteps,
+    /* ✅ 오타(.stepssteps) 삭제하고 steps만 남김 */
     .steps{
       margin: 12px 0 0;
       padding: 0;
@@ -404,31 +404,34 @@
       pointer-events:none;
       z-index:1;
     }
+
+    /* ✅✅✅ 여기만 핵심 변경: hero.jpg "전체 다 보이게" */
     .previewImg{
       width:100%;
-      height: 190px;
-      object-fit: cover;
+      height:auto;           /* ✅ 박스가 이미지에 맞게 늘어남 */
+      object-fit: contain;   /* ✅ 절대 안 잘림 */
       display:block;
-      filter: saturate(1.02) contrast(1.01);
+      background: rgba(0,0,0,.04); /* 남는 여백 자연스럽게 */
+      position: relative;
+      z-index: 0;
     }
 
-    /* ✅✅ 하단 바 = 딱 내용만큼 (이게 핵심) */
-  .previewCap{
-  position: static !important;
-  width: fit-content !important;
-  max-width: calc(100% - 24px);
-  margin: 10px 12px 12px;
-  padding: 7px 12px;
-  border-radius: 999px;
-
-  border:1px solid rgba(255,255,255,.55);
-  background: rgba(255,255,255,.40);
-  backdrop-filter: blur(10px);
-
-  font-size: 13px;
-  color: rgba(20,30,22,.82);
-  white-space: nowrap;
-}
+    /* ✅✅ 하단 바 = 그림 밖으로 빼기 + 딱 내용만큼 */
+    .previewCap{
+      position: static !important;
+      width: fit-content !important;
+      max-width: calc(100% - 24px);
+      margin: 10px 12px 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.40);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      color: rgba(20,30,22,.82);
+      white-space: nowrap;
+      z-index: 2;
+    }
 
     /* Footer */
     footer{
@@ -506,7 +509,9 @@
       .brand{ min-width: 0; }
       .guide{ bottom: 120px; }
       .btn.primary{ width: 100%; }
-      .previewImg{ height: 170px; }
+
+      /* 모바일에서 너무 커지면 살짝 제한 */
+      .previewImg{ max-height: 360px; }
     }
   </style>
 </head>

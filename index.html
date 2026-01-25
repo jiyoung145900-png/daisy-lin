@@ -17,16 +17,17 @@
     :root{
       --bg1:#fff7fb;
       --bg2:#f2fbff;
-      --card: rgba(255,255,255,.72);
+
+      --card: rgba(255,255,255,.74);
       --line: rgba(20,40,60,.10);
       --text: rgba(20,35,55,.92);
       --muted: rgba(20,35,55,.66);
       --shadow: 0 22px 70px rgba(25,50,90,.16);
       --r: 22px;
 
-      --accent: #ffcf5a;     /* 데이지 노랑 */
-      --accent2:#8de7ff;     /* 하늘빛 */
-      --accent3:#ff8fc6;     /* 꽃핑크 */
+      --accent: #ffcf5a;   /* 데이지 노랑 */
+      --accent2:#8de7ff;   /* 하늘 */
+      --accent3:#ff8fc6;   /* 핑크 */
       --btnText:#1b2533;
     }
 
@@ -41,6 +42,7 @@
     }
     a{ color:inherit; text-decoration:none; }
 
+    /* background */
     .bg{
       position:fixed; inset:0; z-index:-1;
       background:
@@ -74,7 +76,9 @@
 
     /* Top */
     .top{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap: 12px;
       margin: 6px 0 16px;
       flex-wrap: wrap;
@@ -103,7 +107,14 @@
     .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
     .brandText{ display:flex; flex-direction:column; gap:3px; }
     .brandText .name{ font-weight: 950; letter-spacing: .2px; font-size: 17px; }
-    .brandText .tag{ font-size: 12.5px; color: var(--muted); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .brandText .tag{
+      font-size: 12.5px;
+      color: var(--muted);
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
     .hint{
       font-size: 12px;
       color: rgba(20,35,55,.75);
@@ -125,7 +136,7 @@
       white-space: nowrap;
     }
 
-    /* Hero */
+    /* ✅ Hero */
     .hero{
       display:grid;
       grid-template-columns: 1.08fr .92fr;
@@ -133,6 +144,7 @@
       align-items: stretch;
     }
     .heroLeft{ padding: 22px; }
+
     h1{
       margin: 0 0 10px;
       font-size: 44px;
@@ -145,6 +157,7 @@
       font-size: 16px;
       line-height: 1.7;
     }
+
     .bullets{
       display:grid;
       gap: 8px;
@@ -171,7 +184,12 @@
       margin-top:1px;
     }
     .bullet b{ display:block; margin-bottom: 2px; }
-    .bullet span{ display:block; color: rgba(20,35,55,.66); font-size: 13.5px; line-height: 1.5; }
+    .bullet span{
+      display:block;
+      color: rgba(20,35,55,.66);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
 
     .actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn{
@@ -201,27 +219,36 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Right image (keep /ad.jpg) */
+    /* ✅✅✅ 핵심: 오른쪽 이미지 "칸에 딱 맞게" */
     .heroRight{
       position:relative;
-      min-height: 440px;
       overflow:hidden;
+      padding:0;              /* ✅ 여백 0 */
+      min-height: 520px;
+      border-radius: var(--r);
     }
     .heroImg{
-      width:100%; height:100%;
-      object-fit: cover;
-      object-position: 60% center; /* 얼굴 위치 필요하면 50~75%로 조절 */
+      position:absolute;
+      inset:0;                /* ✅ 상하좌우 0 */
+      width:100%;
+      height:100%;
+      object-fit: cover;      /* ✅ 비율 유지 + 칸 꽉 채움 */
+      object-position: 60% center; /* 얼굴 위치: 50~75%로 조절 가능 */
       display:block;
-      filter: saturate(1.04) contrast(1.02);
+      margin:0;
+      border:0;
     }
+
     .overlay{
       position:absolute; inset:0;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(20,35,55,.35));
       pointer-events:none;
     }
+
     .badgeRow{
       position:absolute; left: 12px; right: 12px; top: 12px;
       display:flex; justify-content:space-between; gap:10px; align-items:center;
+      z-index:2;
     }
     .pill{
       border: 1px solid rgba(255,255,255,.35);
@@ -234,9 +261,8 @@
       white-space: nowrap;
       display:inline-flex; align-items:center; gap:8px;
     }
-    .pill b{ color: rgba(20,35,55,.92); }
 
-    /* CTA guide not overlapping widget */
+    /* 안내 버튼 (위젯 안 겹치게) */
     .guide{
       position:absolute;
       right: 12px;
@@ -251,6 +277,7 @@
       font-size: 13px;
       box-shadow: 0 18px 55px rgba(25,50,90,.16);
       cursor:pointer; user-select:none;
+      z-index:2;
     }
     .arrow{
       width: 34px; height: 34px;
@@ -275,6 +302,7 @@
       backdrop-filter: blur(10px);
       padding: 12px 12px;
       color: rgba(20,35,55,.90);
+      z-index:2;
     }
     .caption strong{ display:block; font-size: 15.5px; margin-bottom: 4px; }
     .caption span{ display:block; font-size: 13.2px; color: rgba(20,35,55,.74); line-height: 1.45; }
@@ -348,7 +376,7 @@
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
       h1{ font-size: 36px; }
-      .heroRight{ min-height: 360px; }
+      .heroRight{ min-height: 380px; }
       .btn.primary{ width: 100%; }
       .guide{ bottom: 118px; }
     }
@@ -419,8 +447,8 @@
         </div>
       </section>
 
+      <!-- ✅ 오른쪽: 이미지 칸에 딱 맞게 -->
       <aside class="card heroRight" aria-label="DAISY Hero 이미지">
-        <!-- ✅ hero 이미지 유지 -->
         <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
         <div class="overlay"></div>
 
@@ -497,7 +525,6 @@
     function guideChat(){
       openModal();
       try{
-        // 위젯이 버튼 요소로 떠있으면 클릭 시도 (환경에 따라 실패할 수 있음)
         const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
         if (btn) btn.click();
       }catch(e){}
@@ -506,8 +533,13 @@
     function copyTemplate(){
       const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동/전시]예요. 동네 친구 연결 문의드려요 🙂";
       if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(msg).then(()=>{ toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 🙂"); guideChat(); })
-        .catch(()=>{ prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg); guideChat(); });
+        navigator.clipboard.writeText(msg).then(()=>{
+          toast("추천 메시지를 복사했어요! 채팅창에 붙여넣기 🙂");
+          guideChat();
+        }).catch(()=>{
+          prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
+          guideChat();
+        });
       } else {
         prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
         guideChat();

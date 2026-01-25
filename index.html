@@ -15,14 +15,14 @@
 
   <style>
     :root{
-      /* ✅ 데이지 밝은 톤 */
-      --bg1:#fffdf4;
+      /* ✅ 밝은 데이지 무드 */
+      --bg1:#fffdf5;
       --bg2:#f2fbff;
 
       --text: rgba(20,35,55,.92);
       --muted: rgba(20,35,55,.68);
 
-      --card: rgba(255,255,255,.78);
+      --card: rgba(255,255,255,.80);
       --line: rgba(20,40,60,.10);
 
       --shadow: 0 22px 70px rgba(25,50,90,.14);
@@ -42,6 +42,7 @@
       background: linear-gradient(135deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
+
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 24px; }
 
@@ -214,28 +215,32 @@
       display:flex; flex-wrap:wrap; gap:10px;
     }
 
-    /* ✅ 오른쪽 Hero 이미지 칸 100% */
+    /* ✅✅✅ 핵심: "원래처럼" 히어로 이미지 칸에 100% 딱 맞게 */
     .heroRight{
-      position:relative;
-      overflow:hidden;
-      padding:0;
+      position: relative;
       min-height: 520px;
+      overflow: hidden;
+      display: flex;     /* ✅ 안정적으로 100% 꽉 채움 */
+      padding: 0;        /* ✅ 패딩으로 틈 생기는 것 방지 */
     }
     .heroImg{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
+      width: 100%;
+      height: 100%;
+      display: block;
       object-fit: cover;
-      object-position: 60% center; /* 얼굴 위치 조절 */
-      display:block;
+      object-position: 60% center;  /* 얼굴 위치 */
+      flex: 1;                       /* ✅ 칸에 꽉 */
+      /* 성능 옵션(원하면 유지) */
+      loading: eager;
     }
+
+    /* 오버레이/뱃지는 absolute로 올려도 이미지 크기 안 깨짐 */
     .heroOverlay{
       position:absolute; inset:0;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(20,35,55,.35));
       pointer-events:none;
+      z-index:1;
     }
-
     .badgeRow{
       position:absolute; left: 12px; right: 12px; top: 12px;
       display:flex; justify-content:space-between; gap:10px; align-items:center;
@@ -252,7 +257,6 @@
       white-space: nowrap;
       display:inline-flex; align-items:center; gap:8px;
     }
-    .mini b{ color: rgba(20,35,55,.92); }
 
     .guide{
       position:absolute;
@@ -339,7 +343,7 @@
       line-height: 1.55;
     }
 
-    /* ✅ 2번째 이미지 유지 */
+    /* ✅ 2번째 이미지(hero.jpg) 유지 */
     .previewBox{
       margin-top:12px;
       border-radius: 18px;
@@ -483,9 +487,18 @@
         </p>
 
         <ul class="points">
-          <li class="point"><div class="dot">🌼</div><div><b>일상 대화 중심</b><span>부담 없이 편하게 시작</span></div></li>
-          <li class="point"><div class="dot">🧩</div><div><b>관심사로 연결</b><span>카페/산책/맥주/운동/전시</span></div></li>
-          <li class="point"><div class="dot">📍</div><div><b>가까운 동네</b><span>내 주변에서 빠르게 안내</span></div></li>
+          <li class="point">
+            <div class="dot">🌼</div>
+            <div><b>일상 대화 중심</b><span>부담 없이 편하게 시작</span></div>
+          </li>
+          <li class="point">
+            <div class="dot">🧩</div>
+            <div><b>관심사로 연결</b><span>카페/산책/맥주/운동/전시</span></div>
+          </li>
+          <li class="point">
+            <div class="dot">📍</div>
+            <div><b>가까운 동네</b><span>내 주변에서 빠르게 안내</span></div>
+          </li>
         </ul>
 
         <div class="actions">
@@ -500,7 +513,9 @@
       </section>
 
       <aside class="card heroRight">
-        <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
+        <!-- ✅ 이미지 1번 유지 -->
+        <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지" decoding="async">
+
         <div class="heroOverlay"></div>
 
         <div class="badgeRow">
@@ -524,17 +539,22 @@
       <section class="card panel">
         <h3>무엇을 문의하면 되나요?</h3>
         <p>광고 클릭 후 바로 이해되도록, 아래처럼 보내면 충분해요.</p>
+
         <div class="callout">
           <b>추천 메시지</b><br/>
           “안녕하세요! <b>성수</b> 쪽이에요. 관심사는 <b>산책/카페</b>예요. 동네 친구 연결 문의드려요 🙂”
         </div>
+
         <div class="actions" style="margin-top:12px;">
           <button class="btn" type="button" onclick="copyTemplate()">추천 메시지 복사</button>
           <button class="btn" type="button" onclick="guideChat()">채팅 안내</button>
         </div>
 
+        <!-- ✅ 이미지 2번 유지 -->
         <div class="previewBox">
-          <img src="/hero.jpg" class="previewImg" alt="DAISY 분위기 이미지" onerror="this.style.display='none'">
+          <img src="/hero.jpg" class="previewImg" alt="DAISY 분위기 이미지"
+               loading="lazy" decoding="async"
+               onerror="this.style.display='none'">
           <div class="previewCap">🌿 분위기 예시 · 가볍게 이야기부터 시작해요</div>
         </div>
       </section>
@@ -542,11 +562,13 @@
       <section class="card panel">
         <h3>어떻게 시작하나요?</h3>
         <p>아래처럼 간단히 알려주면 연결 안내를 도와드려요.</p>
+
         <div class="callout">
           <b>① 동네</b> (예: 강남/성수/잠실/홍대)<br/>
           <b>② 관심사</b> (예: 산책/카페/맥주/운동/전시)<br/>
           <b>③ 편한 시간</b> (예: 오늘 저녁/주말)
         </div>
+
         <div class="actions" style="margin-top:12px;">
           <button class="btn primary" type="button" onclick="guideChat()">지금 시작하기</button>
         </div>
@@ -560,10 +582,13 @@
       </div>
       <div>© DAISY</div>
     </footer>
+
   </div>
 
+  <!-- Toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- 안내 모달 -->
   <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
     <div class="modal">
       <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
@@ -578,7 +603,7 @@
     </div>
   </div>
 
-  <!-- ✅ SalesSmartly -->
+  <!-- ✅ SalesSmartly: 위젯 로딩 (중복 로드 방지) -->
   <script>
     (function () {
       if (window.__DAISY_SM_LOADED__) return;

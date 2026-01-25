@@ -116,9 +116,17 @@
     }
 
     /* ✅ 칩은 1개만 남김 (글자 줄이기) */
-    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; flex: 0 0 auto;
+    .chipRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  justify-content:flex-end;
+
+  /* ✅ 넓이(가로) 딱 내용만 */
+  flex: 0 0 auto;
   width: fit-content;
-    } 
+}
+
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding: 6px 10px;

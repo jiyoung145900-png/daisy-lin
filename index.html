@@ -115,28 +115,32 @@
       white-space: nowrap;
     }
 
-    /* ✅ 칩은 1개만 남김 (글자 줄이기) */
-    .chipRow{
-  display:flex;
-  flex-wrap:wrap;
+   .chipRow{
+  display: inline-flex;     /* ✅ 핵심: flex → inline-flex */
   gap: 8px;
-  justify-content:flex-end;
-
-  /* ✅ 넓이(가로) 딱 내용만 */
-  flex: 0 0 auto;
-  width: fit-content;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;        /* ✅ 오른쪽에 붙이기 */
+  width: fit-content;       /* ✅ 내용만큼만 */
+  flex-wrap: nowrap;        /* ✅ 줄바꿈 금지 */
 }
 
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 6px 10px;
-      border: 1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.55);
-      border-radius: 999px;
-      color: rgba(20,30,22,.72);
-      font-size: 11px;
-      white-space: nowrap;
-    }
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 6px 10px;
+  border: 1px solid rgba(20,30,22,.14);
+  background: rgba(255,255,255,.55);
+  border-radius: 999px;
+  color: rgba(20,30,22,.72);
+  font-size: 11px;
+  white-space: nowrap;
+
+  width: fit-content;       /* ✅ 얘도 내용만큼 */
+  flex: 0 0 auto;           /* ✅ 절대 늘어나지마 */
+}
+
 
     /* Cards */
     .card{

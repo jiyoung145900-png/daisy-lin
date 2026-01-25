@@ -273,26 +273,45 @@
       pointer-events:none;
     }
 
-    .heroBadge{
-      position:absolute;
-      top: 14px; left: 14px; right: 14px;
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      align-items:center;
-    }
-    .mini{
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.40);
-      backdrop-filter: blur(10px);
-      border-radius: 999px;
-      padding: 9px 12px;
-      font-size: 12.5px;
-      color: rgba(20,30,22,.82);
-      display:inline-flex; align-items:center; gap:8px;
-      white-space: nowrap;
-    }
-    .mini b{ color: rgba(20,30,22,.92); }
+    ```css
+/* ✅ HERO 상단 칩(배지) — 딱 내용만큼만(바처럼 안 늘어남) */
+.heroBadge{
+  position: absolute;
+  top: 14px;
+  left: 14px;
+
+  right: auto;              /* ✅ 전체폭 잡는거 제거 */
+  width: fit-content;       /* ✅ 내용만큼만 */
+  max-width: calc(100% - 28px);
+
+  display: flex;
+  justify-content: flex-start; /* ✅ space-between 제거 */
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;          /* 좁은 화면에서 줄바꿈 */
+}
+
+/* ✅ 배지(칩) 자체도 조금 슬림하게 */
+.mini{
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.40);
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+
+  padding: 6px 10px;        /* ✅ 슬림 */
+  font-size: 11px;          /* ✅ 작게 */
+  line-height: 1;
+
+  color: rgba(20,30,22,.82);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.mini b{ color: rgba(20,30,22,.92); }
+```
+
 
     /* ✅ 캡션 짧게 + 밝게 */
     .heroCaption{

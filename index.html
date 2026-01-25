@@ -5,32 +5,31 @@
   <meta name="facebook-domain-verification" content="v4fatztkiz3g57ba7kzedot89rjdsc" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DAISY | 관심사로 연결되는 동네 친구</title>
-  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요." />
+  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (일상 대화/취미 중심)" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
-  <meta property="og:description" content="가까운 동네에서, 가볍게 대화부터 시작해요." />
+  <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
   <meta property="og:image" content="/ad.jpg" />
 
   <style>
     :root{
-      /* ✅ 밝은 데이지(파스텔) 테마 */
-      --bg0:#fffdf6;
-      --bg2:#f3fbff;
+      /* ✅ 밝은 데이지 톤 (구조/레이아웃 유지, 색만 밝게) */
+      --bg0:#f6fff6;
+      --bg2:#e9fff2;
 
-      --text: rgba(20,30,45,.92);
-      --muted: rgba(20,30,45,.66);
+      --text: rgba(20,30,22,.92);
+      --muted: rgba(20,30,22,.65);
 
-      --card: rgba(255,255,255,.78);
-      --line: rgba(20,40,60,.12);
+      --card: rgba(255,255,255,.72);
+      --line: rgba(20,30,22,.14);
 
-      --shadow: 0 18px 70px rgba(25,55,90,.14);
+      --shadow: 0 18px 70px rgba(0,0,0,.10);
       --radius: 24px;
 
-      --accent: #ffd95b;   /* 데이지 노랑 */
-      --accent2:#9be8ff;   /* 하늘 */
-      --accent3:#ff9cca;   /* 핑크 */
+      --accent: #f7d75d;      /* DAISY 노랑 */
+      --accent2: #2fd7a7;     /* 민트(밝게) */
     }
 
     *{ box-sizing:border-box; }
@@ -39,98 +38,99 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--text);
-      background: linear-gradient(135deg, var(--bg0), var(--bg2));
+      background: linear-gradient(140deg, var(--bg0), var(--bg2));
       overflow-x:hidden;
     }
 
-    /* ✅ 파스텔 배경 (무겁지 않게) */
+    /* ✅ 밝은 배경 */
     .bg{
       position:fixed; inset:0; z-index:-1;
       background:
-        radial-gradient(900px 600px at 14% 10%, rgba(255,156,202,.22), transparent 60%),
-        radial-gradient(900px 600px at 88% 10%, rgba(155,232,255,.26), transparent 60%),
-        radial-gradient(900px 700px at 55% 105%, rgba(255,217,91,.20), transparent 55%),
-        linear-gradient(135deg, var(--bg0), var(--bg2));
+        radial-gradient(1100px 800px at 16% 10%, rgba(247,215,93,.22), transparent 60%),
+        radial-gradient(1100px 800px at 86% 12%, rgba(47,215,167,.16), transparent 62%),
+        radial-gradient(900px 700px at 40% 110%, rgba(0,0,0,.04), transparent 55%),
+        linear-gradient(140deg, var(--bg0), var(--bg2));
     }
     .bg:before{
       content:"";
       position:absolute; inset:-220px;
       background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,.65) 0 2px, transparent 3px) 0 0/42px 42px,
-        radial-gradient(circle at 70% 60%, rgba(255,255,255,.45) 0 2px, transparent 3px) 0 0/60px 60px;
-      opacity:.55;
+        radial-gradient(circle at 20% 30%, rgba(0,0,0,.05) 0 2px, transparent 3px) 0 0/38px 38px,
+        radial-gradient(circle at 70% 60%, rgba(0,0,0,.035) 0 2px, transparent 3px) 0 0/54px 54px;
+      opacity:.24;
+      transform: rotate(-2deg);
       pointer-events:none;
-      transform: rotate(-1deg);
+      filter: blur(.2px);
     }
 
     a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width: 1120px; margin: 0 auto; padding: 24px; }
+    .wrap{ max-width: 1120px; margin: 0 auto; padding: 26px; }
 
     /* Top */
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      flex-wrap:wrap;
+      gap: 14px;
+      margin-bottom: 16px;
     }
     .brand{
-      display:flex; align-items:center; gap: 12px;
+      display:flex; align-items:center; gap: 14px;
+      min-width: 240px;
       cursor:pointer;
       user-select:none;
     }
     .mark{
-      width: 56px; height: 56px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.88);
-      box-shadow: 0 14px 38px rgba(25,55,90,.10);
+      width: 64px; height: 64px;
+      border-radius: 22px;
+      border: 1px solid rgba(20,30,22,.16);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 18px 48px rgba(0,0,0,.08);
       overflow:hidden;
       display:grid; place-items:center;
-      position:relative;
       flex: 0 0 auto;
+      position:relative;
     }
     .mark:after{
       content:"";
       position:absolute; inset:-1px;
-      background: radial-gradient(140px 140px at 30% 20%, rgba(255,217,91,.55), transparent 60%);
+      background: radial-gradient(140px 140px at 30% 20%, rgba(247,215,93,.38), transparent 60%);
       pointer-events:none;
     }
     .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    .brandText{ display:flex; flex-direction:column; gap:2px; }
-    .brandText .name{ font-weight: 950; letter-spacing: .2px; font-size: 17px; }
+    .brandText{ display:flex; flex-direction:column; gap:4px; }
+    .brandText .name{ font-weight: 950; letter-spacing: .3px; font-size: 18px; }
     .brandText .tag{
-      font-size: 12.5px;
+      font-size: 12.8px;
       color: var(--muted);
       display:flex; align-items:center; gap:8px; flex-wrap:wrap;
     }
     .tapHint{
       font-size: 12px;
-      color: rgba(20,30,45,.70);
-      border:1px dashed rgba(20,40,60,.18);
-      background: rgba(255,255,255,.72);
+      color: rgba(20,30,22,.72);
+      border:1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.65);
       padding: 6px 10px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
-    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; }
+    /* ✅ 칩은 1개만 남김 (글자 줄이기) */
+    .chipRow{ display:flex; flex-wrap:wrap; gap: 8px; justify-content:flex-end; }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
-      padding: 9px 11px;
-      border: 1px solid rgba(20,40,60,.12);
-      background: rgba(255,255,255,.72);
+      padding: 10px 12px;
+      border: 1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.55);
       border-radius: 999px;
-      color: rgba(20,30,45,.68);
-      font-size: 12.4px;
+      color: rgba(20,30,22,.72);
+      font-size: 12.5px;
       white-space: nowrap;
     }
 
     /* Cards */
     .card{
-      border: 1px solid var(--line);
+      border: 1px solid rgba(20,30,22,.14);
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -138,7 +138,7 @@
       backdrop-filter: blur(10px);
     }
 
-    /* ✅ Hero (구조 그대로) */
+    /* Hero */
     .hero{
       display:grid;
       grid-template-columns: 1.08fr .92fr;
@@ -147,59 +147,42 @@
     }
 
     .heroLeft{
-      padding: 22px;
+      padding: 26px;
       position:relative;
     }
     .heroLeft:before{
       content:"";
       position:absolute; inset:-1px;
-      background: radial-gradient(520px 360px at 18% 10%, rgba(255,217,91,.20), transparent 60%);
+      background: radial-gradient(520px 360px at 18% 10%, rgba(247,215,93,.22), transparent 60%);
       pointer-events:none;
     }
 
     h1{
       margin: 0 0 10px;
-      font-size: 44px;
-      letter-spacing: -0.9px;
+      font-size: 46px;
+      letter-spacing: -0.8px;
       line-height: 1.05;
       position:relative;
     }
+
+    /* ✅ 문장 짧게 */
     .lead{
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: var(--muted);
-      font-size: 16px;
+      font-size: 16.5px;
       line-height: 1.7;
       position:relative;
     }
 
-    /* ✅ 글자 줄이기: 포인트 3줄을 카드형으로 간단하게 */
+    /* ✅ 포인트 3개 → 2개로 줄임 */
     .points{
-      margin: 0 0 14px;
-      padding: 0;
-      list-style:none;
-      display:grid;
-      gap: 8px;
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14.5px;
       position:relative;
     }
-    .point{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(20,40,60,.10);
-      background: rgba(255,255,255,.72);
-    }
-    .dot{
-      width: 28px; height: 28px;
-      border-radius: 12px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(255,217,91,.75);
-      background: rgba(255,217,91,.40);
-      font-weight: 950;
-      flex: 0 0 auto;
-      margin-top: 1px;
-    }
-    .point b{ display:block; margin-bottom: 2px; }
-    .point span{ display:block; color: rgba(20,30,45,.62); font-size: 13.5px; line-height: 1.45; }
 
     .actions{
       display:flex;
@@ -213,63 +196,66 @@
       align-items:center;
       justify-content:center;
       gap: 10px;
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-radius: 16px;
-      border: 1px solid rgba(20,40,60,.14);
-      background: rgba(255,255,255,.78);
-      color: rgba(20,30,45,.90);
+      border: 1px solid rgba(20,30,22,.16);
+      background: rgba(255,255,255,.62);
+      color: rgba(20,30,22,.92);
       font-weight: 950;
       cursor:pointer;
-      transition: transform .08s ease, filter .2s ease, background .2s ease;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, filter .2s ease;
     }
     .btn:hover{
       transform: translateY(-1px);
-      filter: brightness(1.02);
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.78);
+      border-color: rgba(20,30,22,.22);
+      filter: brightness(1.01);
     }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(255,217,91,1), rgba(255,156,202,.92));
-      border-color: rgba(255,217,91,.70);
-      color: rgba(20,30,45,.92);
-      padding: 15px 18px;
-      font-size: 16.5px;
+      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.85));
+      border-color: rgba(247,215,93,.70);
+      color: #1b1b1b;
+      padding: 16px 22px;
+      font-size: 17px;
       border-radius: 18px;
-      box-shadow: 0 16px 55px rgba(255,156,202,.18);
+      box-shadow: 0 16px 55px rgba(247,215,93,.22);
     }
 
+    /* ✅ 마이크로 문구 3줄 → 1줄만 */
     .micro{
-      margin-top: 10px;
-      color: rgba(20,30,45,.72);
-      font-size: 12.7px;
+      margin-top: 12px;
+      color: rgba(20,30,22,.66);
+      font-size: 12.8px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       position:relative;
     }
 
-    /* ✅✅✅ 여기 중요: "원본 방식 그대로" 이미지 칸 딱 맞게 */
+    /* ✅✅✅ 히어로 이미지 "칸에 딱 맞게" (여기만 안전하게 고정) */
     .heroRight{
       position: relative;
       min-height: 460px;
       overflow: hidden;
-      background: rgba(255,255,255,.35);
+      background: rgba(255,255,255,.55);
     }
     .heroImg{
+      position:absolute;
+      inset:0;
       width:100%;
       height:100%;
       object-fit: cover;
       object-position: 60% center;
       display:block;
-      /* ✅ 원본처럼 맞게 + 살짝만 보정 */
-      filter: saturate(1.04) contrast(1.02);
-      transform: scale(1.00); /* 원본처럼 딱 맞게 (여기 중요) */
+      filter: saturate(1.03) contrast(1.01);
+      transform:none;
     }
 
     .heroOverlay{
       position:absolute; inset:0;
       background:
-        radial-gradient(600px 420px at 20% 20%, rgba(255,217,91,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(20,30,45,.18));
+        radial-gradient(600px 420px at 20% 20%, rgba(247,215,93,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.20));
       pointer-events:none;
     }
 
@@ -282,19 +268,38 @@
       align-items:center;
     }
     .mini{
-      border: 1px solid rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.55);
       background: rgba(255,255,255,.40);
       backdrop-filter: blur(10px);
       border-radius: 999px;
       padding: 9px 12px;
-      font-size: 12.4px;
-      color: rgba(20,30,45,.84);
+      font-size: 12.5px;
+      color: rgba(20,30,22,.82);
       display:inline-flex; align-items:center; gap:8px;
       white-space: nowrap;
     }
-    .mini b{ color: rgba(20,30,45,.92); }
+    .mini b{ color: rgba(20,30,22,.92); }
 
-    /* ✅ 안내 배지(유지) */
+    /* ✅ 캡션 짧게 + 밝게 */
+    .heroCaption{
+      position:absolute;
+      left: 14px; right: 14px; bottom: 14px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.40);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 12px 14px;
+      color: rgba(20,30,22,.88);
+    }
+    .heroCaption strong{ display:block; margin-bottom: 4px; font-size: 15px; }
+    .heroCaption span{
+      color: rgba(20,30,22,.66);
+      font-size: 13.2px;
+      line-height: 1.45;
+      display:block;
+    }
+
+    /* ✅ 안내 배지(겹침 방지 그대로 유지) */
     .guide{
       position:absolute;
       right: 14px;
@@ -304,12 +309,12 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.45);
-      background: rgba(255,255,255,.40);
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.42);
       backdrop-filter: blur(10px);
-      color: rgba(20,30,45,.88);
+      color: rgba(20,30,22,.86);
       font-size: 13px;
-      box-shadow: 0 18px 60px rgba(25,55,90,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.10);
       cursor:pointer;
       user-select:none;
     }
@@ -317,9 +322,9 @@
       width: 34px; height: 34px;
       border-radius: 14px;
       display:grid; place-items:center;
-      border: 1px solid rgba(255,217,91,.75);
-      background: rgba(255,217,91,.42);
-      color: rgba(20,30,45,.92);
+      border: 1px solid rgba(247,215,93,.65);
+      background: rgba(247,215,93,.32);
+      color: rgba(20,30,22,.86);
       font-weight: 950;
     }
     .pulse{ animation: pulse 1.6s ease-in-out infinite; }
@@ -328,24 +333,27 @@
       50%{ transform: translateY(-3px); opacity: 1; }
     }
 
-    .heroCaption{
-      position:absolute;
-      left: 14px; right: 14px; bottom: 14px;
-      border: 1px solid rgba(255,255,255,.45);
-      background: rgba(255,255,255,.40);
-      backdrop-filter: blur(10px);
+    /* Sections */
+    .sectionTitle{
+      margin: 18px 0 10px;
+      font-size: 15px;
+      color: rgba(20,30,22,.82);
+      letter-spacing: .2px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tile{
+      padding: 14px;
+      border: 1px solid rgba(20,30,22,.12);
+      background: rgba(255,255,255,.62);
       border-radius: 18px;
-      padding: 12px 12px;
     }
-    .heroCaption strong{ display:block; margin-bottom: 5px; font-size: 15.5px; color: rgba(20,30,45,.92); }
-    .heroCaption span{
-      color: rgba(20,30,45,.72);
-      font-size: 13.2px;
-      line-height: 1.45;
-      display:block;
-    }
+    .tile b{ display:block; margin-bottom: 6px; }
+    .tile p{ margin:0; color: rgba(20,30,22,.62); font-size: 13.5px; line-height: 1.58; }
 
-    /* ✅ 아래 영역은 “필요한 것만” 남기기 */
     .two{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -354,53 +362,90 @@
     }
     .panel{ padding: 18px; }
     .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
-    .panel p{ margin:0; color: var(--muted); line-height:1.65; font-size: 14.5px; }
+    .panel p{ margin:0; color: rgba(20,30,22,.64); line-height:1.65; font-size: 14.5px; }
+
+    .steps{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style:none;
+      display:grid;
+      gap: 10px;
+    }
+    .step{
+      display:flex; gap:10px; align-items:flex-start;
+      border: 1px solid rgba(20,30,22,.12);
+      background: rgba(255,255,255,.58);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .num{
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(247,215,93,.75);
+      background: rgba(247,215,93,.34);
+      color: rgba(20,30,22,.92);
+      font-weight: 950;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+    .step b{ display:block; margin-bottom: 2px; }
+    .step span{ display:block; color: rgba(20,30,22,.62); font-size: 13.5px; line-height: 1.5; }
 
     .callout{
       margin-top: 12px;
-      border: 1px dashed rgba(20,40,60,.16);
-      background: rgba(255,255,255,.72);
+      border: 1px dashed rgba(20,30,22,.18);
+      background: rgba(255,255,255,.56);
       border-radius: 16px;
       padding: 12px;
-      color: rgba(20,30,45,.74);
+      color: rgba(20,30,22,.74);
       font-size: 13px;
       line-height: 1.55;
     }
 
-    /* ✅ 2번째 이미지(hero.jpg) 유지 */
+    /* ✅ 2번째 이미지(유지) - 밝게 */
     .previewBox{
       margin-top:12px;
       border-radius: 18px;
       overflow:hidden;
-      border: 1px solid rgba(20,40,60,.12);
-      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(20,30,22,.12);
+      background: rgba(255,255,255,.55);
       position:relative;
+    }
+    .previewBox:before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(520px 260px at 20% 10%, rgba(47,215,167,.14), transparent 60%);
+      pointer-events:none;
+      z-index:1;
     }
     .previewImg{
       width:100%;
-      height: 180px;
+      height: 190px;
       object-fit: cover;
       display:block;
-      filter: saturate(1.03) contrast(1.02);
+      filter: saturate(1.02) contrast(1.01);
     }
     .previewCap{
       position:absolute;
       left: 12px;
       right: 12px;
       bottom: 12px;
+      z-index:2;
       padding: 10px 12px;
       border-radius: 16px;
-      border:1px solid rgba(255,255,255,.45);
+      border:1px solid rgba(255,255,255,.55);
       background: rgba(255,255,255,.40);
       backdrop-filter: blur(10px);
       font-size: 13px;
-      color: rgba(20,30,45,.86);
+      color: rgba(20,30,22,.82);
     }
 
+    /* Footer */
     footer{
-      margin-top: 16px;
-      padding: 12px 4px 6px;
-      color: rgba(20,30,45,.60);
+      margin-top: 18px;
+      padding: 14px 4px 6px;
+      color: rgba(20,30,22,.62);
       font-size: 12.5px;
       display:flex;
       justify-content: space-between;
@@ -408,12 +453,12 @@
       flex-wrap: wrap;
       opacity: .95;
     }
-    footer a{ text-decoration: underline; opacity: .9; }
+    footer a{ text-decoration: underline; opacity: .92; }
 
     /* modal */
     .modalBg{
       position:fixed; inset:0;
-      background: rgba(20,30,45,.38);
+      background: rgba(0,0,0,.30);
       display:none;
       align-items:center; justify-content:center;
       padding: 18px;
@@ -422,21 +467,20 @@
     .modal{
       width: min(560px, 100%);
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 30px 120px rgba(25,55,90,.22);
+      border: 1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 30px 120px rgba(0,0,0,.18);
       padding: 16px;
-      color: rgba(20,30,45,.92);
-      backdrop-filter: blur(10px);
+      color: rgba(20,30,22,.92);
     }
     .modal h4{ margin: 0 0 8px; font-size: 17px; }
-    .modal p{ margin: 0; color: rgba(20,30,45,.74); line-height: 1.6; font-size: 14px; }
+    .modal p{ margin: 0; color: rgba(20,30,22,.70); line-height: 1.6; font-size: 14px; }
     .modal .row{ display:flex; gap:10px; justify-content:flex-end; margin-top: 12px; flex-wrap:wrap; }
     .x{
       float:right;
-      border: 1px solid rgba(20,40,60,.16);
-      background: rgba(255,255,255,.75);
-      color: rgba(20,30,45,.90);
+      border: 1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.66);
+      color: rgba(20,30,22,.92);
       border-radius: 12px;
       padding: 8px 10px;
       cursor:pointer;
@@ -453,22 +497,24 @@
       display:none;
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(20,30,22,.14);
+      background: rgba(255,255,255,.78);
       backdrop-filter: blur(10px);
-      color: rgba(20,30,45,.88);
+      color: rgba(20,30,22,.90);
       font-size: 13px;
-      box-shadow: 0 18px 60px rgba(25,55,90,.18);
+      box-shadow: 0 18px 60px rgba(0,0,0,.10);
       max-width: min(92vw, 560px);
       text-align:center;
     }
 
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
-      h1{ font-size: 36px; }
+      h1{ font-size: 38px; }
       .heroRight{ min-height: 360px; }
+      .grid3{ grid-template-columns: 1fr; }
       .two{ grid-template-columns: 1fr; }
       .chipRow{ justify-content:flex-start; }
+      .brand{ min-width: 0; }
       .guide{ bottom: 120px; }
       .btn.primary{ width: 100%; }
       .previewImg{ height: 170px; }
@@ -498,10 +544,8 @@
         </div>
       </div>
 
-      <!-- ✅ 칩도 3개 -> 2개로 줄임 -->
       <div class="chipRow">
-        <div class="chip">✅ 로그인 없이 문의</div>
-        <div class="chip">✅ 일상 대화 중심</div>
+        <div class="chip">✅ 로그인 없이 바로 문의</div>
       </div>
     </div>
 
@@ -509,91 +553,111 @@
     <div class="hero">
       <section class="card heroLeft">
         <h1>오늘, 동네 친구<br/>어때요?</h1>
+
         <p class="lead">
-          심심할 때 가볍게 대화하고<br/>
-          <b>가까운 동네 친구</b>를 만나보세요 🙂
+          심심할 때 가볍게 대화하고, <b>가까운 동네 친구</b>를 찾아보세요 🙂
         </p>
 
-        <!-- ✅ 길던 리스트를 카드형 3줄로 정리 -->
         <ul class="points">
-          <li class="point">
-            <div class="dot">🌼</div>
-            <div><b>가볍게 시작</b><span>대화부터 편하게</span></div>
-          </li>
-          <li class="point">
-            <div class="dot">🧩</div>
-            <div><b>관심사 연결</b><span>산책/카페/맥주/운동</span></div>
-          </li>
-          <li class="point">
-            <div class="dot">📍</div>
-            <div><b>내 주변</b><span>가까운 곳에서 만나요</span></div>
-          </li>
+          <li><b>일상 대화</b>부터 편하게</li>
+          <li><b>관심사</b>로 먼저 연결</li>
         </ul>
 
         <div class="actions">
-          <button class="btn primary" type="button" onclick="guideChat()">지금 채팅하기</button>
-          <button class="btn" type="button" onclick="copyTemplate()">추천문구 복사</button>
+          <button class="btn primary" type="button" onclick="guideChat()">지금 채팅으로 문의하기</button>
+          <a class="btn" href="#how">방법 보기</a>
+          <button class="btn" type="button" onclick="copyTemplate()">메시지 복사</button>
         </div>
 
-        <!-- ✅ 마이크로 문구도 줄임 -->
         <div class="micro">
           <span>💬 채팅은 <b>오른쪽 아래 로고</b>에서 시작돼요</span>
-          <span>🧩 로고가 안 보이면 광고 차단 확장 OFF</span>
         </div>
       </section>
 
       <aside class="card heroRight">
-        <!-- ✅ 이미지 1번 유지 (원본 구조 그대로) -->
+        <!-- ✅ 이미지 1 유지 -->
         <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
         <div class="heroOverlay"></div>
 
         <div class="heroBadge">
           <div class="mini">🌼 <b>DAISY</b></div>
-          <div class="mini">가볍게 · 가까이</div>
+          <div class="mini">가까운 곳에서, 가볍게</div>
         </div>
 
         <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
           <div class="arrow">↘</div>
-          <div><b>오른쪽 아래 로고</b> 클릭</div>
+          <div><b>오른쪽 아래 로고</b> 눌러 시작</div>
         </div>
 
         <div class="heroCaption">
-          <strong>부담 없이 시작해요</strong>
-          <span>관심사로 연결되는 일상 대화</span>
+          <strong>가볍게 이야기부터</strong>
+          <span>부담 없이 시작해요.</span>
         </div>
       </aside>
     </div>
 
-    <!-- ✅ 아래는 “필요한 것만” 남겨서 간촐하게 -->
-    <div class="two" style="margin-top:12px;">
-      <section class="card panel">
-        <h3>뭐라고 보내면 돼요?</h3>
-        <p>아래처럼 보내면 충분해요.</p>
+    <!-- For who -->
+    <div class="sectionTitle">데이지는 이런 분께 잘 맞아요</div>
+    <div class="grid3">
+      <div class="tile">
+        <b>퇴근 후, 가볍게</b>
+        <p>커피/산책처럼 부담 없는 만남.</p>
+      </div>
+      <div class="tile">
+        <b>새로운 동네 생활</b>
+        <p>동네 친구가 필요할 때.</p>
+      </div>
+      <div class="tile">
+        <b>관심사로 연결</b>
+        <p>취미로 먼저 자연스럽게.</p>
+      </div>
+    </div>
 
-        <div class="callout">
-          “안녕하세요! <b>[동네]</b> 쪽이에요.<br/>
-          관심사는 <b>[산책/카페]</b>예요 🙂”
-        </div>
+    <!-- How -->
+    <div id="how" class="two">
+      <section class="card panel">
+        <h3>어떻게 시작하나요?</h3>
+        <p>아래처럼만 알려주면 돼요.</p>
+
+        <ul class="steps">
+          <li class="step">
+            <div class="num">1</div>
+            <div><b>동네</b><span>예: 강남 / 성수 / 잠실</span></div>
+          </li>
+          <li class="step">
+            <div class="num">2</div>
+            <div><b>관심사</b><span>예: 산책 / 카페 / 운동</span></div>
+          </li>
+        </ul>
 
         <div class="actions" style="margin-top:12px;">
-          <button class="btn" type="button" onclick="copyTemplate()">추천문구 복사</button>
-          <button class="btn primary" type="button" onclick="guideChat()">바로 채팅</button>
+          <button class="btn primary" type="button" onclick="guideChat()">채팅 시작</button>
         </div>
       </section>
 
       <section class="card panel">
-        <h3>분위기 예시</h3>
-        <p>가볍게 이야기부터 시작해요.</p>
+        <h3>무엇을 보내면 되나요?</h3>
+        <p>아래 문장 그대로 보내면 끝.</p>
 
-        <!-- ✅ 이미지 2번 유지 -->
+        <div class="callout" style="margin-top:12px;">
+          “안녕하세요! <b>[동네]</b> 쪽이에요. 관심사는 <b>[산책/카페]</b>예요 🙂”
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn" type="button" onclick="copyTemplate()">문장 복사</button>
+          <button class="btn" type="button" onclick="guideChat()">채팅 열기</button>
+        </div>
+
+        <!-- ✅ 이미지 2 유지 -->
         <div class="previewBox">
           <img src="/hero.jpg" class="previewImg" alt="DAISY 분위기 이미지"
                onerror="this.style.display='none'">
-          <div class="previewCap">🌿 편하게 · 천천히</div>
+          <div class="previewCap">🌿 분위기 예시</div>
         </div>
       </section>
     </div>
 
+    <!-- Footer -->
     <footer>
       <div>
         <a href="/privacy.html">개인정보처리방침</a> ·
@@ -611,10 +675,9 @@
   <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
     <div class="modal">
       <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
-      <h4>채팅은 이렇게 시작해요 🌼</h4>
+      <h4>채팅 시작 방법</h4>
       <p>
-        화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂<br/>
-        아이콘이 안 보이면 <b>광고 차단 확장(AdBlock/uBlock)</b> 또는 브라우저 설정 때문에 가려질 수 있어요.
+        화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂
       </p>
       <div class="row">
         <button class="btn primary" type="button" onclick="closeModal()">확인</button>
@@ -656,7 +719,7 @@
     }
 
     function copyTemplate(){
-      const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/맥주/운동]예요 🙂";
+      const msg = "안녕하세요! [동네] 쪽이에요. 관심사는 [산책/카페/운동]예요 🙂";
       if (navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(msg).then(()=>{
           toast("복사 완료! 채팅창에 붙여넣기 🙂");

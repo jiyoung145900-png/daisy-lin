@@ -1,722 +1,614 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="facebook-domain-verification" content="1830zgnruay3iaktbgkrxmfoi6ydz2" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DAISY | 관심사로 연결되는 동네 친구</title>
-  <meta name="description" content="관심사로 연결되는 동네 친구. 심심할 때 가볍게 대화부터 시작해요. (일상 대화/취미 중심)" />
+  <title>BANADA | 프리미엄 소개 서비스</title>
+  <meta name="description" content="진지한 만남을 원하는 분들을 위한 맞춤 소개 서비스. 텔레그램으로 바로 문의하세요." />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="DAISY | 관심사로 연결되는 동네 친구" />
-  <meta property="og:description" content="동네에서 가까운 사람과 관심사로 연결되는 일상 대화. 채팅으로 바로 문의해보세요." />
-  <meta property="og:image" content="/ad.jpg" />
+  <meta property="og:title" content="BANADA | 프리미엄 소개 서비스" />
+  <meta property="og:description" content="진지한 만남을 원하는 분들을 위한 맞춤 소개 서비스." />
+  <meta property="og:image" content="/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root{
-      /* ✅ 밝은 데이지 톤 */
-      --bg0:#f6fff6;
-      --bg2:#e9fff2;
-
-      --text: rgba(20,30,22,.92);
-      --muted: rgba(20,30,22,.65);
-
-      --card: rgba(255,255,255,.72);
-      --line: rgba(20,30,22,.14);
-
-      --shadow: 0 18px 70px rgba(0,0,0,.10);
-      --radius: 24px;
-
-      --accent: #f7d75d;
-      --accent2: #2fd7a7;
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      background: #fdf8f2;
+      color: #1e1008;
+      overflow-x: hidden;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      color: var(--text);
-      background: linear-gradient(140deg, var(--bg0), var(--bg2));
-      overflow-x:hidden;
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+    ul { list-style: none; }
+
+    /* ─── Design Tokens ─── */
+    :root {
+      --gold:        #c8913a;
+      --gold-light:  #e8c87a;
+      --gold-pale:   #f5e9c8;
+      --cream:       #fdf8f2;
+      --cream2:      #faf3e8;
+      --white:       #ffffff;
+      --brown-dark:  #1e1008;
+      --brown-mid:   #5c3a1e;
+      --brown-soft:  #9a7040;
+      --border:      rgba(200, 145, 58, 0.22);
+      --shadow-gold: 0 8px 40px rgba(200, 145, 58, 0.14);
+      --radius-lg:   24px;
+      --radius-md:   16px;
+      --radius-sm:   10px;
+      --radius-pill: 999px;
     }
 
-    /* ✅ 밝은 배경 */
-    .bg{
-      position:fixed; inset:0; z-index:-1;
+    /* ─── Background deco ─── */
+    .bg-deco {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
       background:
-        radial-gradient(1100px 800px at 16% 10%, rgba(247,215,93,.22), transparent 60%),
-        radial-gradient(1100px 800px at 86% 12%, rgba(47,215,167,.16), transparent 62%),
-        radial-gradient(900px 700px at 40% 110%, rgba(0,0,0,.04), transparent 55%),
-        linear-gradient(140deg, var(--bg0), var(--bg2));
-    }
-    .bg:before{
-      content:"";
-      position:absolute; inset:-220px;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(0,0,0,.05) 0 2px, transparent 3px) 0 0/38px 38px,
-        radial-gradient(circle at 70% 60%, rgba(0,0,0,.035) 0 2px, transparent 3px) 0 0/54px 54px;
-      opacity:.24;
-      transform: rotate(-2deg);
-      pointer-events:none;
-      filter: blur(.2px);
+        radial-gradient(900px 600px at 10% 0%,   rgba(232,200,122,.13), transparent 60%),
+        radial-gradient(700px 500px at 92% 100%,  rgba(200,145,58,.10), transparent 60%),
+        #fdf8f2;
     }
 
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width: 1120px; margin: 0 auto; padding: 26px; }
+    /* ─── Wrapper ─── */
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
 
-    /* Top */
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
-      margin-bottom: 16px;
+    /* ═══════════════════════
+       HEADER / NAV
+    ═══════════════════════ */
+    header {
+      padding: 20px 0 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(253,248,242,.88);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
     }
-    .brand{
-      display:flex; align-items:center; gap: 14px;
-      min-width: 240px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .mark{
-      width: 64px; height: 64px;
-      border-radius: 22px;
-      border: 1px solid rgba(20,30,22,.16);
-      background: rgba(255,255,255,.78);
-      box-shadow: 0 18px 48px rgba(0,0,0,.08);
-      overflow:hidden;
-      display:grid; place-items:center;
-      flex: 0 0 auto;
-      position:relative;
-    }
-    .mark:after{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(140px 140px at 30% 20%, rgba(247,215,93,.38), transparent 60%);
-      pointer-events:none;
-    }
-    .mark img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .brandText{ display:flex; flex-direction:column; gap:4px; }
-    .brandText .name{ font-weight: 950; letter-spacing: .3px; font-size: 18px; }
-    .brandText .tag{
-      font-size: 12.8px;
-      color: var(--muted);
-      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-    }
-    .tapHint{
-      font-size: 12px;
-      color: rgba(20,30,22,.72);
-      border:1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.65);
-      padding: 6px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    /* ✅ 상단 칩 (짧게/안늘어나게) */
-    .chipRow{
-      display: inline-flex;
-      gap: 8px;
+    .header-inner {
+      display: flex;
       align-items: center;
-      margin-left: auto;
-      width: fit-content;
-      flex-wrap: nowrap;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border: 1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.55);
-      border-radius: 999px;
-      color: rgba(20,30,22,.72);
-      font-size: 11px;
-      white-space: nowrap;
-      width: fit-content;
-      flex: 0 0 auto;
-    }
-
-    /* Cards */
-    .card{
-      border: 1px solid rgba(20,30,22,.14);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(10px);
-    }
-
-    /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    .heroLeft{
-      padding: 26px;
-      position:relative;
-    }
-    .heroLeft:before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(520px 360px at 18% 10%, rgba(247,215,93,.22), transparent 60%);
-      pointer-events:none;
-    }
-
-    h1{
-      margin: 0 0 10px;
-      font-size: 46px;
-      letter-spacing: -0.8px;
-      line-height: 1.05;
-      position:relative;
-    }
-
-    .lead{
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 16.5px;
-      line-height: 1.7;
-      position:relative;
-    }
-
-    .points{
-      margin: 0 0 18px;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.9;
-      font-size: 14.5px;
-      position:relative;
-    }
-
-    .actions{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      position:relative;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(20,30,22,.16);
-      background: rgba(255,255,255,.62);
-      color: rgba(20,30,22,.92);
-      font-weight: 950;
-      cursor:pointer;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease, filter .2s ease;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.78);
-      border-color: rgba(20,30,22,.22);
-      filter: brightness(1.01);
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(247,215,93,1), rgba(247,215,93,.85));
-      border-color: rgba(247,215,93,.70);
-      color: #1b1b1b;
-      padding: 16px 22px;
-      font-size: 17px;
-      border-radius: 18px;
-      box-shadow: 0 16px 55px rgba(247,215,93,.22);
-    }
-
-    .micro{
-      margin-top: 12px;
-      color: rgba(20,30,22,.66);
-      font-size: 12.8px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      position:relative;
-    }
-
-    /* ✅ 히어로 이미지 "칸에 딱 맞게" */
-    .heroRight{
-      position: relative;
-      min-height: 460px;
-      overflow: hidden;
-      background: rgba(255,255,255,.55);
-    }
-    .heroImg{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      object-position: 60% center;
-      display:block;
-      filter: saturate(1.03) contrast(1.01);
-      transform:none;
-    }
-    .heroOverlay{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(600px 420px at 20% 20%, rgba(247,215,93,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.20));
-      pointer-events:none;
-    }
-
-    .heroCaption{
-      position:absolute;
-      left: 14px; right: 14px; bottom: 14px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.40);
-      backdrop-filter: blur(10px);
-      border-radius: 18px;
-      padding: 12px 14px;
-      color: rgba(20,30,22,.88);
-    }
-    .heroCaption strong{ display:block; margin-bottom: 4px; font-size: 15px; }
-    .heroCaption span{
-      color: rgba(20,30,22,.66);
-      font-size: 13.2px;
-      line-height: 1.45;
-      display:block;
-    }
-
-    .guide{
-      position:absolute;
-      right: 14px;
-      bottom: 140px;
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.42);
-      backdrop-filter: blur(10px);
-      color: rgba(20,30,22,.86);
-      font-size: 13px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.10);
-      cursor:pointer;
-      user-select:none;
-    }
-    .arrow{
-      width: 34px; height: 34px;
-      border-radius: 14px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(247,215,93,.65);
-      background: rgba(247,215,93,.32);
-      color: rgba(20,30,22,.86);
-      font-weight: 950;
-    }
-    .pulse{ animation: pulse 1.6s ease-in-out infinite; }
-    @keyframes pulse{
-      0%,100%{ transform: translateY(0); opacity: .92; }
-      50%{ transform: translateY(-3px); opacity: 1; }
-    }
-
-    /* Sections */
-    .sectionTitle{
-      margin: 18px 0 10px;
-      font-size: 15px;
-      color: rgba(20,30,22,.82);
-      letter-spacing: .2px;
-    }
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .tile{
-      padding: 14px;
-      border: 1px solid rgba(20,30,22,.12);
-      background: rgba(255,255,255,.62);
-      border-radius: 18px;
-    }
-    .tile b{ display:block; margin-bottom: 6px; }
-    .tile p{ margin:0; color: rgba(20,30,22,.62); font-size: 13.5px; line-height: 1.58; }
-
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 12px;
-    }
-    .panel{ padding: 18px; }
-    .panel h3{ margin: 0 0 8px; font-size: 18px; letter-spacing:-.2px; }
-    .panel p{ margin:0; color: rgba(20,30,22,.64); line-height:1.65; font-size: 14.5px; }
-
-    /* ✅ 오타(.stepssteps) 삭제하고 steps만 남김 */
-    .steps{
-      margin: 12px 0 0;
-      padding: 0;
-      list-style:none;
-      display:grid;
-      gap: 10px;
-    }
-    .step{
-      display:flex; gap:10px; align-items:flex-start;
-      border: 1px solid rgba(20,30,22,.12);
-      background: rgba(255,255,255,.58);
-      border-radius: 16px;
-      padding: 12px;
-    }
-    .num{
-      width: 30px; height: 30px;
-      border-radius: 12px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(247,215,93,.75);
-      background: rgba(247,215,93,.34);
-      color: rgba(20,30,22,.92);
-      font-weight: 950;
-      flex: 0 0 auto;
-      margin-top: 1px;
-    }
-    .step b{ display:block; margin-bottom: 2px; }
-    .step span{ display:block; color: rgba(20,30,22,.62); font-size: 13.5px; line-height: 1.5; }
-
-    .callout{
-      margin-top: 12px;
-      border: 1px dashed rgba(20,30,22,.18);
-      background: rgba(255,255,255,.56);
-      border-radius: 16px;
-      padding: 12px;
-      color: rgba(20,30,22,.74);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    /* ✅ hero.jpg 프리뷰 */
-    .previewBox{
-      margin-top:12px;
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(20,30,22,.12);
-      background: rgba(255,255,255,.55);
-      position:relative;
-    }
-    .previewBox:before{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(520px 260px at 20% 10%, rgba(47,215,167,.14), transparent 60%);
-      pointer-events:none;
-      z-index:1;
-    }
-
-    /* ✅✅✅ 여기만 핵심 변경: hero.jpg "전체 다 보이게" */
-    .previewImg{
-      width:100%;
-      height:auto;           /* ✅ 박스가 이미지에 맞게 늘어남 */
-      object-fit: contain;   /* ✅ 절대 안 잘림 */
-      display:block;
-      background: rgba(0,0,0,.04); /* 남는 여백 자연스럽게 */
-      position: relative;
-      z-index: 0;
-    }
-
-    /* ✅✅ 하단 바 = 그림 밖으로 빼기 + 딱 내용만큼 */
-    .previewCap{
-      position: static !important;
-      width: fit-content !important;
-      max-width: calc(100% - 24px);
-      margin: 10px 12px 12px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.40);
-      backdrop-filter: blur(10px);
-      font-size: 13px;
-      color: rgba(20,30,22,.82);
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    /* Footer */
-    footer{
-      margin-top: 18px;
-      padding: 14px 4px 6px;
-      color: rgba(20,30,22,.62);
-      font-size: 12.5px;
-      display:flex;
       justify-content: space-between;
+      gap: 16px;
+    }
+
+    /* ── Logo placeholder ──
+       로고 이미지를 logo.png 로 넣어두거나
+       <img src="YOUR_LOGO.png"> 으로 교체하세요 */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-img-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      box-shadow: 0 4px 16px rgba(200,145,58,.10);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    /* 로고 이미지 태그 — src 를 실제 로고 경로로 교체 */
+    .logo-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .logo-text-wrap { display: flex; flex-direction: column; gap: 2px; }
+    .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .logo-tagline {
+      font-size: 10.5px;
+      color: var(--brown-soft);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--gold);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      box-shadow: 0 4px 18px rgba(200,145,58,.30);
+      transition: background .2s, transform .12s;
+    }
+    .header-cta:hover { background: #b07c2e; transform: translateY(-1px); }
+    .header-cta svg { flex-shrink: 0; }
+
+    /* ═══════════════════════
+       HERO
+    ═══════════════════════ */
+    .hero {
+      padding: 72px 0 64px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      padding: 5px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--white);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      color: var(--brown-dark);
+      line-height: 1.25;
+      margin-bottom: 18px;
+      letter-spacing: -.5px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--brown-mid);
+      line-height: 1.85;
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      opacity: .95;
     }
-    footer a{ text-decoration: underline; opacity: .92; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light) 60%, var(--gold));
+      background-size: 200% 100%;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      box-shadow: 0 8px 32px rgba(200,145,58,.32);
+      transition: background-position .4s, transform .12s;
+    }
+    .btn-primary:hover { background-position: 100% 0; transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 26px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--brown-mid);
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: var(--shadow-gold);
+      transition: border-color .2s, transform .12s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); transform: translateY(-1px); }
+    .hero-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--brown-soft);
+      opacity: .8;
+    }
 
-    /* modal */
-    .modalBg{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.30);
-      display:none;
-      align-items:center; justify-content:center;
-      padding: 18px;
-      z-index: 9999;
+    /* ─── Gold rule ─── */
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 56px;
     }
-    .modal{
-      width: min(560px, 100%);
-      border-radius: 18px;
-      border: 1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 30px 120px rgba(0,0,0,.18);
-      padding: 16px;
-      color: rgba(20,30,22,.92);
+    .gold-rule::before, .gold-rule::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border));
     }
-    .modal h4{ margin: 0 0 8px; font-size: 17px; }
-    .modal p{ margin: 0; color: rgba(20,30,22,.70); line-height: 1.6; font-size: 14px; }
-    .modal .row{ display:flex; gap:10px; justify-content:flex-end; margin-top: 12px; flex-wrap:wrap; }
-    .x{
-      float:right;
-      border: 1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.66);
-      color: rgba(20,30,22,.92);
+    .gold-rule::after { background: linear-gradient(90deg, var(--border), transparent); }
+    .gold-rule-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); }
+
+    /* ═══════════════════════
+       FEATURES / WHO
+    ═══════════════════════ */
+    .section { margin-bottom: 72px; }
+    .section-eyebrow {
+      font-size: 10.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--brown-dark);
+      margin-bottom: 36px;
+      line-height: 1.35;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      transition: box-shadow .2s, transform .15s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-weight: 900;
+      background: var(--gold-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
     }
-
-    /* toast */
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      z-index: 10000;
-      display:none;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(20,30,22,.14);
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(10px);
-      color: rgba(20,30,22,.90);
+    .feature-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      margin-bottom: 6px;
+    }
+    .feature-desc {
       font-size: 13px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.10);
-      max-width: min(92vw, 560px);
-      text-align:center;
+      color: var(--brown-mid);
+      line-height: 1.65;
+      font-weight: 300;
     }
 
-    @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-      h1{ font-size: 38px; }
-      .heroRight{ min-height: 360px; }
-      .grid3{ grid-template-columns: 1fr; }
-      .two{ grid-template-columns: 1fr; }
-      .chipRow{ justify-content:flex-start; }
-      .brand{ min-width: 0; }
-      .guide{ bottom: 120px; }
-      .btn.primary{ width: 100%; }
+    /* ═══════════════════════
+       HOW IT WORKS
+    ═══════════════════════ */
+    .steps-wrap {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-gold);
+    }
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(200,145,58,.28);
+    }
+    .step-body b {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      margin-bottom: 4px;
+    }
+    .step-body span {
+      font-size: 13.5px;
+      color: var(--brown-mid);
+      line-height: 1.6;
+      font-weight: 300;
+    }
 
-      /* 모바일에서 너무 커지면 살짝 제한 */
-      .previewImg{ max-height: 360px; }
+    /* ═══════════════════════
+       CTA BANNER
+    ═══════════════════════ */
+    .cta-banner {
+      background: linear-gradient(130deg, #1e1008 0%, #3b2010 55%, #5c3214 100%);
+      border-radius: var(--radius-lg);
+      padding: 52px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 72px;
+    }
+    .cta-banner::before {
+      content: "";
+      position: absolute;
+      top: -80px; left: -80px; right: -80px; bottom: -80px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(232,200,122,.16) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-banner-eyebrow {
+      font-size: 10.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(232,200,122,.6);
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      position: relative;
+    }
+    .cta-banner-title span { color: var(--gold-light); }
+    .cta-banner-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.58);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .cta-tg-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light) 60%, var(--gold));
+      background-size: 200% 100%;
+      color: #1e1008;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      box-shadow: 0 8px 32px rgba(200,145,58,.36);
+      transition: background-position .4s, transform .12s;
+      position: relative;
+    }
+    .cta-tg-btn:hover { background-position: 100% 0; transform: translateY(-2px); }
+    .cta-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,.36);
+      position: relative;
+    }
+
+    /* ─── Gem dots ─── */
+    .gem-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .gem { width: 7px; height: 7px; border-radius: 50%; background: rgba(232,200,122,.35); }
+    .gem.on { background: var(--gold-light); width: 20px; border-radius: 4px; }
+
+    /* ═══════════════════════
+       FOOTER
+    ═══════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 36px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--brown-soft);
+    }
+    footer a { text-decoration: underline; opacity: .8; }
+    footer a:hover { opacity: 1; }
+
+    /* ═══════════════════════
+       RESPONSIVE
+    ═══════════════════════ */
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .steps-wrap { padding: 28px 20px; }
+      .cta-banner { padding: 40px 22px; }
+      .hero { padding: 52px 0 48px; }
+      .header-cta span { display: none; }
+      .hero-title { font-size: 30px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="bg" aria-hidden="true"></div>
 
+<div class="bg-deco" aria-hidden="true"></div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <div class="wrap header-inner">
+
+    <!-- 로고: logo.png 파일을 같은 폴더에 넣거나 경로 수정 -->
+    <div class="logo-wrap">
+      <div class="logo-img-box">
+        <img src="logo.png" alt="BANADA 로고"
+             onerror="this.style.display='none'" />
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name">BANADA</div>
+        <div class="logo-tagline">Premium Matchmaking</div>
+      </div>
+    </div>
+
+    <!-- 텔레그램 버튼 — @아이디 부분을 실제로 교체하세요 -->
+    <a class="header-cta" href="https://t.me/YOUR_TELEGRAM_ID" target="_blank" rel="noopener">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21.2 5.1L2.8 11.7c-1.2.5-1.2 1.2-.2 1.5l4.6 1.4 1.8 5.5c.2.6.4.8 1 .8s.8-.2 1.1-.5l2.2-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.4-1.6z"/>
+      </svg>
+      <span>텔레그램 문의</span>
+    </a>
+
+  </div>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<main>
   <div class="wrap">
+    <section class="hero">
+      <div class="hero-eyebrow">Premium Matchmaking Service</div>
+      <h1 class="hero-title">
+        진지한 만남을 위한<br/>
+        <em>맞춤 소개 서비스</em>
+      </h1>
+      <p class="hero-desc">
+        바쁜 일상 속에서도 잘 맞는 분을 만날 수 있도록<br/>
+        라이프스타일과 관심사 기반으로 직접 연결해 드려요.
+      </p>
+      <div class="hero-actions">
+        <!-- 텔레그램 연결 — @아이디 교체 -->
+        <a class="btn-primary" href="https://t.me/YOUR_TELEGRAM_ID" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21.2 5.1L2.8 11.7c-1.2.5-1.2 1.2-.2 1.5l4.6 1.4 1.8 5.5c.2.6.4.8 1 .8s.8-.2 1.1-.5l2.2-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.4-1.6z"/>
+          </svg>
+          지금 텔레그램으로 문의하기
+        </a>
+        <a class="btn-secondary" href="#how">
+          소개 방식 보기
+        </a>
+      </div>
+      <p class="hero-note">💬 문의만 해도 괜찮아요 · 부담 없이 시작해요</p>
+    </section>
 
-    <!-- Top -->
-    <div class="top">
-      <div class="brand" onclick="guideChat()" title="채팅 안내 보기">
-        <div class="mark" aria-label="DAISY 로고">
-          <img src="/logo.png" alt="DAISY"
-               onerror="this.style.display='none';var t=document.getElementById('textLogo'); if(t) t.style.display='block';">
-          <div id="textLogo" style="display:none;font-weight:950;letter-spacing:.2px;">DAISY</div>
+    <div class="gold-rule"><div class="gold-rule-dot"></div></div>
+
+    <!-- ══════════ FEATURES ══════════ -->
+    <section class="section">
+      <div class="section-eyebrow">Why BANADA</div>
+      <h2 class="section-title">이런 분께 잘 맞아요</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💼</div>
+          <div class="feature-title">바쁜 일상 속에서</div>
+          <p class="feature-desc">따로 시간 내어 찾아다니기 어려운 분께 직접 연결해 드려요.</p>
         </div>
-        <div class="brandText">
-          <div class="name">DAISY</div>
-          <div class="tag">
-            관심사로 연결되는 동네 친구
-            <span class="tapHint">↘ 오른쪽 아래 로고 클릭</span>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <div class="feature-title">진지한 관계를 원할 때</div>
+          <p class="feature-desc">가볍지 않고, 실질적인 만남을 원하시는 분께 적합해요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-title">신뢰할 수 있는 소개</div>
+          <p class="feature-desc">검증된 방식으로 매칭 후 수수료를 안내해 드려요.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <div class="feature-title">취향이 맞는 상대</div>
+          <p class="feature-desc">라이프스타일과 가치관이 비슷한 분으로 연결해 드려요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ HOW IT WORKS ══════════ -->
+    <section class="section" id="how">
+      <div class="section-eyebrow">How it works</div>
+      <h2 class="section-title">소개는 이렇게 진행돼요</h2>
+      <div class="steps-wrap">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <b>텔레그램으로 문의</b>
+            <span>간단한 자기 소개와 원하는 상대 유형을 알려주시면 돼요.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <b>맞춤 상대 추천</b>
+            <span>라이프스타일·관심사 기반으로 잘 맞는 분을 찾아 연결해 드려요.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <b>편하게 만남 시작</b>
+            <span>부담 없이 커피 한 잔부터 시작하면 돼요. 매칭 후 수수료를 안내해 드려요.</span>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="chipRow">
-        <div class="chip">✅ 로그인 없이 바로 문의</div>
+    <!-- ══════════ CTA BANNER ══════════ -->
+    <div class="cta-banner">
+      <div class="gem-row">
+        <div class="gem"></div>
+        <div class="gem on"></div>
+        <div class="gem"></div>
       </div>
+      <div class="cta-banner-eyebrow">Start Now</div>
+      <h2 class="cta-banner-title">
+        지금 바로 <span>텔레그램</span>으로<br/>문의해 보세요
+      </h2>
+      <p class="cta-banner-desc">
+        먼저 문의만 해도 괜찮아요.<br/>
+        소개 수수료는 매칭 성사 후 안내해 드려요 🙂
+      </p>
+
+      <!-- 텔레그램 연결 — @아이디 교체 -->
+      <a class="cta-tg-btn" href="https://t.me/YOUR_TELEGRAM_ID" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21.2 5.1L2.8 11.7c-1.2.5-1.2 1.2-.2 1.5l4.6 1.4 1.8 5.5c.2.6.4.8 1 .8s.8-.2 1.1-.5l2.2-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8l3-14.2c.3-1.4-.5-2.1-1.4-1.6z"/>
+        </svg>
+        텔레그램으로 무료 문의하기
+      </a>
+      <p class="cta-note">비밀 보장 · 부담 없이 편하게</p>
     </div>
-
-    <!-- Hero -->
-    <div class="hero">
-      <section class="card heroLeft">
-        <h1>오늘, 동네 친구<br/>어때요?</h1>
-
-        <p class="lead">
-          심심할 때 가볍게 대화하고, <b>가까운 동네 친구</b>를 찾아보세요 🙂
-        </p>
-
-        <ul class="points">
-          <li><b>일상 대화</b>부터 편하게</li>
-          <li><b>관심사</b>로 먼저 연결</li>
-        </ul>
-
-        <div class="actions">
-          <button class="btn primary" type="button" onclick="guideChat()">지금 채팅으로 문의하기</button>
-          <a class="btn" href="#how">방법 보기</a>
-          <button class="btn" type="button" onclick="copyTemplate()">메시지 복사</button>
-        </div>
-
-        <div class="micro">
-          <span>💬 채팅은 <b>오른쪽 아래 로고</b>에서 시작돼요</span>
-        </div>
-      </section>
-
-      <aside class="card heroRight">
-        <img class="heroImg" src="/ad.jpg" alt="DAISY 광고 이미지">
-        <div class="heroOverlay"></div>
-
-        <div class="guide pulse" onclick="guideChat()" role="button" aria-label="채팅 안내">
-          <div class="arrow">↘</div>
-          <div><b>오른쪽 아래 로고</b> 눌러 시작</div>
-        </div>
-
-        <div class="heroCaption">
-          <strong>가볍게 이야기부터</strong>
-          <span>부담 없이 시작해요.</span>
-        </div>
-      </aside>
-    </div>
-
-    <!-- For who -->
-    <div class="sectionTitle">데이지는 이런 분께 잘 맞아요</div>
-    <div class="grid3">
-      <div class="tile">
-        <b>퇴근 후, 가볍게</b>
-        <p>커피/산책처럼 부담 없는 만남.</p>
-      </div>
-      <div class="tile">
-        <b>새로운 동네 생활</b>
-        <p>동네 친구가 필요할 때.</p>
-      </div>
-      <div class="tile">
-        <b>관심사로 연결</b>
-        <p>취미로 먼저 자연스럽게.</p>
-      </div>
-    </div>
-
-    <!-- How -->
-    <div id="how" class="two">
-      <section class="card panel">
-        <h3>어떻게 시작하나요?</h3>
-        <p>아래처럼만 알려주면 돼요.</p>
-
-        <ul class="steps">
-          <li class="step">
-            <div class="num">1</div>
-            <div><b>동네</b><span>예: 강남 / 성수 / 잠실</span></div>
-          </li>
-          <li class="step">
-            <div class="num">2</div>
-            <div><b>관심사</b><span>예: 산책 / 카페 / 운동</span></div>
-          </li>
-        </ul>
-
-        <div class="actions" style="margin-top:12px;">
-          <button class="btn primary" type="button" onclick="guideChat()">채팅 시작</button>
-        </div>
-      </section>
-
-      <section class="card panel">
-        <h3>무엇을 보내면 되나요?</h3>
-        <p>아래 문장 그대로 보내면 끝.</p>
-
-        <div class="callout" style="margin-top:12px;">
-          “안녕하세요! <b>[성수동]</b> 쪽이에요. 관심사는 <b>[산책/카페]</b>예요 🙂”
-        </div>
-
-        <div class="actions" style="margin-top:12px;">
-          <button class="btn" type="button" onclick="copyTemplate()">문장 복사</button>
-          <button class="btn" type="button" onclick="guideChat()">채팅 열기</button>
-        </div>
-
-        <div class="previewBox">
-          <img src="/hero.jpg" class="previewImg" alt="DAISY 분위기 이미지"
-               onerror="this.style.display='none'">
-          <div class="previewCap">🌿 로그인 없이 바로 문의 가능</div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div>
-        <a href="/privacy.html">개인정보처리방침</a> ·
-        <a href="/terms.html">이용약관</a>
-      </div>
-      <div>© DAISY</div>
-    </footer>
 
   </div>
+</main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <!-- 안내 모달 -->
-  <div class="modalBg" id="modalBg" role="dialog" aria-modal="true" aria-label="채팅 안내">
-    <div class="modal">
-      <button class="x" onclick="closeModal()" aria-label="닫기">닫기</button>
-      <h4>채팅 시작 방법</h4>
-      <p>화면 <b>오른쪽 아래</b>에 있는 <b>DAISY 로고(채팅 아이콘)</b>을 눌러주세요 🙂</p>
-      <div class="row">
-        <button class="btn primary" type="button" onclick="closeModal()">확인</button>
-      </div>
-    </div>
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <p>© BANADA · 프리미엄 만남 소개 서비스</p>
   </div>
+</footer>
 
-  <!-- ✅ SalesSmartly: 위젯 로딩 -->
-  <script>
-    (function () {
-      if (window.__DAISY_SM_LOADED__) return;
-      window.__DAISY_SM_LOADED__ = true;
-      var s = document.createElement("script");
-      s.src = "https://plugin-code.salesmartly.com/js/project_604078_623915_1768637217.js";
-      s.async = true;
-      document.head.appendChild(s);
-    })();
-  </script>
-
-  <script>
-    function openModal(){ document.getElementById('modalBg').style.display='flex'; }
-    function closeModal(){ document.getElementById('modalBg').style.display='none'; }
-
-    function toast(msg){
-      var el = document.getElementById("toast");
-      if(!el) return;
-      el.textContent = msg;
-      el.style.display = "block";
-      clearTimeout(window.__toastT);
-      window.__toastT = setTimeout(function(){ el.style.display="none"; }, 2400);
-    }
-
-    function guideChat(){
-      openModal();
-      try{
-        const btn = document.querySelector('[class*="salessmartly"] button, [id*="salessmartly"] button');
-        if (btn) btn.click();
-      }catch(e){}
-    }
-
-    function copyTemplate(){
-      const msg = "안녕하세요! [성수] 쪽이에요. 관심사는 [산책/카페/운동]예요 🙂";
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(msg).then(()=>{
-          toast("복사 완료! 채팅창에 붙여넣기 🙂");
-          guideChat();
-        }).catch(()=>{
-          prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
-          guideChat();
-        });
-      } else {
-        prompt("아래 문장을 복사해서 채팅창에 붙여넣어 주세요:", msg);
-        guideChat();
-      }
-    }
-  </script>
 </body>
 </html>
